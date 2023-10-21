@@ -31,7 +31,6 @@ public final class ContentFavouritesView: UIView {
         $0.alignment = .center
         $0.distribution = .fill
         $0.spacing = 15
-        $0.backgroundColor = .orange
     }
     
     // MARK: - Private Properties

@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - InfoFavouritesViewProtocol
 public protocol InfoFavouritesViewProtocol: AnyObject {
     func fovouriteButtonTapped(isFovourite: Bool, id: Int)
 }
@@ -24,27 +25,20 @@ public final class InfoFavouritesView: UIView {
         $0.spacing = 20
     }
     
-    private lazy var containerFavouriteButtonView = UIView().then {
-        $0.backgroundColor = .blue
-    }
+    private lazy var containerFavouriteButtonView = UIView()
     
     private lazy var favouriteButton = UIButton().then {
         $0.setImage(UIImage(named: "yellow_star"), for: .normal)
         $0.addTarget(self, action: #selector(addInFavourites), for: .touchUpInside)
     }
     
-    private lazy var containerVerticalStackView = UIView().then {
-        $0.backgroundColor = .red
-    }
+    private lazy var containerVerticalStackView = UIView()
     
     private lazy var verticalStackView = UIStackView().then {
         $0.axis = .vertical
         $0.alignment = .leading
         $0.distribution = .fill
         $0.spacing = 15
-        $0.backgroundColor = .green
-//        $0.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-//        $0.setContentHuggingPriority(.defaultLow, for: .vertical)
     }
         
     // MARK: - Private Properties
@@ -69,7 +63,7 @@ public final class InfoFavouritesView: UIView {
     
     private func setup() {
         layer.cornerRadius = 12
-        backgroundColor = .blue
+        backgroundColor = .lightGray
         addSubviews()
         makeConstraints()
     }

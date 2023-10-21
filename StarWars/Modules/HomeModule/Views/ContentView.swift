@@ -83,8 +83,9 @@ public final class ContentView: UIView {
         
     // MARK: - Private Properties
     
+    private var isSearch = false
     private var inputString: String = ""
-    private var parameterForSearch: SearchURL = .people
+    private var parameterForSearch: SearchURL?
     private var isPeopleButtonEnabled = false
     private var isStarshipButtonEnabled = false
     private var isPlanetButtonEnabled = false
@@ -148,7 +149,8 @@ public final class ContentView: UIView {
     }
     
     @objc private func getInfo() {
-        delegate?.getInfoButtonDidTap(inputText: inputString, parameterForSearch: parameterForSearch)
+        guard let parameter = parameterForSearch  else { return }
+        delegate?.getInfoButtonDidTap(inputText: inputString, parameterForSearch: parameter)
         inputString = ""
     }
     
@@ -162,7 +164,7 @@ public final class ContentView: UIView {
         peopleButton.backgroundColor = .blue
         peopleButton.setImage(UIImage(named: "color_people"), for: .normal)
         parameterForSearch = SearchURL.people
-        
+        configureGetInfoButton(isEnabled: true)
     }
     
     @objc private func planetButtonDidTap() {
@@ -175,6 +177,7 @@ public final class ContentView: UIView {
         planetButton.backgroundColor = .blue
         planetButton.setImage(UIImage(named: "color_planet"), for: .normal)
         parameterForSearch = SearchURL.planet
+        configureGetInfoButton(isEnabled: true)
     }
     
     @objc private func starshipButtonDidTap() {
@@ -187,6 +190,7 @@ public final class ContentView: UIView {
         starshipButton.backgroundColor = .blue
         starshipButton.setImage(UIImage(named: "color_starship"), for: .normal)
         parameterForSearch = SearchURL.starsShip
+        configureGetInfoButton(isEnabled: true)
     }
     
     private func configurePeopleButton() {
@@ -203,29 +207,39 @@ public final class ContentView: UIView {
         starshipButton.backgroundColor = .lightGray
         starshipButton.setImage(UIImage(named: "starship"), for: .normal)
     }
-}
-
-extension ContentView: UITextFieldDelegate {
-    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        print("textField.text", textField.text)
-        
-        if let text = textField.text,
-           text.count > 0
+    
+    private func configureGetInfoButton(isEnabled: Bool) {
+        if
+            isEnabled,
+            inputString.count > 2
         {
             getInfoButton.backgroundColor = .blue
             getInfoButton.setTitleColor(.white, for: .normal)
             getInfoButton.isEnabled = true
-            inputString = text
         } else {
             getInfoButton.backgroundColor = .lightGray
             getInfoButton.setTitleColor(.lightText, for: .normal)
             getInfoButton.isEnabled = false
         }
-        return true
     }
-    
-    public func textFieldDidEndEditing(_ textField: UITextField) {
-        let text = textField.text
+}
+
+extension ContentView: UITextFieldDelegate {
+    public func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard textField.text != "" else {
+            inputString = textField.text ?? ""
+            infoView.isHidden = true
+            isPeopleButtonEnabled = false
+            isPlanetButtonEnabled = false
+            isStarshipButtonEnabled = false
+            configurePeopleButton()
+            configurePlanetButton()
+            configureStarshipButton()
+            return
+        }
+        inputString = textField.text ?? ""
+        configureGetInfoButton(isEnabled: true)
+        isSearch = true
     }
 }
 
@@ -245,6 +259,7 @@ extension ContentView: Configurable {
             )
         )
         infoView.isHidden = false
+        isSearch = false
     }
 }
 

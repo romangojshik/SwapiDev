@@ -29,7 +29,6 @@ public final class InfoView: UIView {
         $0.alignment = .leading
         $0.distribution = .fill
         $0.spacing = 15
-        backgroundColor = .red
     }
         
     // MARK: - Private Properties
@@ -109,6 +108,9 @@ extension InfoView: Configurable {
     }
     
     public func configure(with viewModel: ViewModel) {
+        verticalStackView.subviews.forEach { (view) in
+            view.removeFromSuperview()
+        }
         setupInfoValueView(viewModels: viewModel.infoValueViewModels)
     }
 }
