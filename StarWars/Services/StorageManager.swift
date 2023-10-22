@@ -10,17 +10,27 @@ import UIKit
 
 // MARK: - CRUD
 public final class CoreDataManager: NSObject {
-    public static let shared = CoreDataManager()
-    private override init() {}
+    // MARK: - Public Properties
     
+    public static let shared = CoreDataManager()
+    public var isUpdate = false
+    
+    // MARK: - Private Properties
+
     private var appDelegate: AppDelegate {
         UIApplication.shared.delegate as! AppDelegate
     }
     
+    // MARK: - Private Methods
+    
+    private override init() {}
+
     private var context: NSManagedObjectContext {
         appDelegate.persistentConatainer.viewContext
     }
     
+    // MARK: - Public Methods
+
     public func createPerson(id: Int32, name: String, gender: String) {
         guard let personEntityDescription = NSEntityDescription.entity(forEntityName: "Person", in: context) else { return }
         let person = Person(entity: personEntityDescription, insertInto: context)

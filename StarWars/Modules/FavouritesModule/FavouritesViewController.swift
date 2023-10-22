@@ -5,11 +5,9 @@
 //  Created by Roman on 8/31/23.
 //
 
-import UIKit
-import Alamofire
+import SnapKit
 
 class FavouritesViewController: UIViewController {
-    
     // MARK: - Subview Properties
     
     private lazy var contentView = ContentFavouritesView().then {
@@ -21,6 +19,7 @@ class FavouritesViewController: UIViewController {
     private var contentViewModel = ContentViewModel()
     private let apiService = ApiService()
     private var isReloadContent = false
+    private var people: [Person] = []
     
     // MARK: - UIViewController
     
@@ -31,6 +30,13 @@ class FavouritesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if CoreDataManager.shared.isUpdate {
+            contentView.reloadData()
+            people = CoreDataManager.shared.fetchPeople()
+            configure(with: .init(people: people))
+            CoreDataManager.shared.isUpdate = false
+        }
     }
     
     // MARK: - Private Methods
@@ -38,7 +44,8 @@ class FavouritesViewController: UIViewController {
     private func setup() {
         addSubviews()
         makeConstraints()
-        configure(with: contentViewModel)
+        people = CoreDataManager.shared.fetchPeople()
+        configure(with: .init(people: people))
     }
     
     private func addSubviews() {
@@ -53,8 +60,9 @@ class FavouritesViewController: UIViewController {
     
     private func deleteFromDB(id: Int) {
         CoreDataManager.shared.deletePerson(id: Int32(id))
+        people = CoreDataManager.shared.fetchPeople()
         contentView.reloadData()
-        configure(with: contentViewModel)
+        configure(with: .init(people: people))
     }
 }
 
@@ -64,7 +72,6 @@ extension FavouritesViewController: Configurable {
     public typealias ViewModel = ContentViewModel
     
     public func configure(with viewModel: ViewModel) {
-        let people = CoreDataManager.shared.fetchPeople()
         people.forEach { person in
             switch person {
             case person as Person:
@@ -88,7 +95,6 @@ extension FavouritesViewController: Configurable {
 
 extension FavouritesViewController: ContentFavouritesProtocol {
     func fovouriteButtonTapped(isFovourite: Bool, id: Int) {
-        print("id", id)
         deleteFromDB(id: id)
     }
 }

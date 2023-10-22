@@ -5,7 +5,7 @@
 //  Created by Roman on 9/2/23.
 //
 
-import UIKit
+import SnapKit
 
 // MARK: - InfoFavouritesViewProtocol
 public protocol InfoFavouritesViewProtocol: AnyObject {

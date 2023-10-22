@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import SnapKit
-import Alamofire
 
 class MainTabBarViewController: UITabBarController {
     override func viewDidLoad() {
@@ -18,12 +16,11 @@ class MainTabBarViewController: UITabBarController {
         generateTabBar()
         
     }
-    
-        
+    // MARK: - Private Methods
+
     private func addSubviews() {}
 
     private func makeConstraints() {}
-
 
     private func generateTabBar() {
         viewControllers = [

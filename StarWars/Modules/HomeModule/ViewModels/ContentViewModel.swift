@@ -15,6 +15,7 @@ public struct ContentViewModel {
     
     /// Model Person
     public let gender: String?
+    public var people: [Person] = []
     
     /// Model Planet
     public let diameter: String?
@@ -25,7 +26,8 @@ public struct ContentViewModel {
         name: String? = nil,
         gender: String?  = nil,
         diameter: String? = nil,
-        population: String? = nil
+        population: String? = nil,
+        people: [Person] = []
     ) {
         self.id = id
         self.name = name

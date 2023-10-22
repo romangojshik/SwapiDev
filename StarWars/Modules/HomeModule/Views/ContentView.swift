@@ -45,6 +45,7 @@ public final class ContentView: UIView {
     
     private lazy var personButton = UIButton().then {
         $0.backgroundColor = .lightGray
+        $0.isUserInteractionEnabled = false
         $0.setImage(UIImage(named: "person"), for: .normal)
         $0.layer.cornerRadius = 6
         $0.imageView?.contentMode = .scaleAspectFit
@@ -53,6 +54,7 @@ public final class ContentView: UIView {
     
     private lazy var planetButton = UIButton().then {
         $0.backgroundColor = .lightGray
+        $0.isUserInteractionEnabled = false
         $0.setImage(UIImage(named: "planet"), for: .normal)
         $0.layer.cornerRadius = 6
         $0.imageView?.contentMode = .scaleAspectFit
@@ -61,6 +63,7 @@ public final class ContentView: UIView {
     
     private lazy var starshipButton = UIButton().then {
         $0.backgroundColor = .lightGray
+        $0.isUserInteractionEnabled = false
         $0.setImage(UIImage(named: "starship"), for: .normal)
         $0.layer.cornerRadius = 6
         $0.imageView?.contentMode = .scaleAspectFit
@@ -83,10 +86,9 @@ public final class ContentView: UIView {
         
     // MARK: - Private Properties
     
-    private var isSearch = false
     private var inputString: String = ""
     private var parameterForSearch: SearchURL?
-    private var isPeopleButtonEnabled = false
+    private var isPersonButtonEnabled = false
     private var isStarshipButtonEnabled = false
     private var isPlanetButtonEnabled = false
     
@@ -137,7 +139,7 @@ public final class ContentView: UIView {
             make.height.equalTo(32)
         }
         getInfoButton.snp.makeConstraints { make in
-            make.top.equalTo(horizontalStackView.snp.bottom).offset(16)
+            make.top.equalTo(horizontalStackView.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
             make.height.equalTo(50)
             make.width.equalTo(200)
@@ -155,10 +157,10 @@ public final class ContentView: UIView {
     }
     
     @objc private func peopleButtonDidTap() {
-        isPeopleButtonEnabled = true
+        isPersonButtonEnabled = true
         isPlanetButtonEnabled = false
         isStarshipButtonEnabled = false
-        configurePeopleButton()
+        configurePersonButton()
         configurePlanetButton()
         configureStarshipButton()
         personButton.backgroundColor = .blue
@@ -168,10 +170,10 @@ public final class ContentView: UIView {
     }
     
     @objc private func planetButtonDidTap() {
-        isPeopleButtonEnabled = false
+        isPersonButtonEnabled = false
         isPlanetButtonEnabled = true
         isStarshipButtonEnabled = false
-        configurePeopleButton()
+        configurePersonButton()
         configurePlanetButton()
         configureStarshipButton()
         planetButton.backgroundColor = .blue
@@ -181,10 +183,10 @@ public final class ContentView: UIView {
     }
     
     @objc private func starshipButtonDidTap() {
-        isPeopleButtonEnabled = false
+        isPersonButtonEnabled = false
         isPlanetButtonEnabled = false
         isStarshipButtonEnabled = true
-        configurePeopleButton()
+        configurePersonButton()
         configurePlanetButton()
         configureStarshipButton()
         starshipButton.backgroundColor = .blue
@@ -193,7 +195,7 @@ public final class ContentView: UIView {
         configureGetInfoButton(isEnabled: true)
     }
     
-    private func configurePeopleButton() {
+    private func configurePersonButton() {
         personButton.backgroundColor = .lightGray
         personButton.setImage(UIImage(named: "person"), for: .normal)
     }
@@ -211,7 +213,8 @@ public final class ContentView: UIView {
     private func configureGetInfoButton(isEnabled: Bool) {
         if
             isEnabled,
-            inputString.count > 2
+            inputString.count > 2,
+            parameterForSearch != nil
         {
             getInfoButton.backgroundColor = .blue
             getInfoButton.setTitleColor(.white, for: .normal)
@@ -220,6 +223,13 @@ public final class ContentView: UIView {
             getInfoButton.backgroundColor = .lightGray
             getInfoButton.setTitleColor(.lightText, for: .normal)
             getInfoButton.isEnabled = false
+            
+            isPersonButtonEnabled = false
+            isPlanetButtonEnabled = false
+            isStarshipButtonEnabled = false
+            configurePersonButton()
+            configurePlanetButton()
+            configureStarshipButton()
         }
     }
 }
@@ -229,17 +239,27 @@ extension ContentView: UITextFieldDelegate {
         guard textField.text != "" else {
             inputString = textField.text ?? ""
             infoView.isHidden = true
-            isPeopleButtonEnabled = false
+            parameterForSearch = nil
+            
+            isPersonButtonEnabled = false
             isPlanetButtonEnabled = false
             isStarshipButtonEnabled = false
-            configurePeopleButton()
+            
+            personButton.isUserInteractionEnabled = false
+            planetButton.isUserInteractionEnabled = false
+            starshipButton.isUserInteractionEnabled = false
+            
+            configurePersonButton()
             configurePlanetButton()
             configureStarshipButton()
+            
             return
         }
         inputString = textField.text ?? ""
         configureGetInfoButton(isEnabled: true)
-        isSearch = true
+        personButton.isUserInteractionEnabled = true
+        planetButton.isUserInteractionEnabled = true
+        starshipButton.isUserInteractionEnabled = true
     }
 }
 
@@ -259,7 +279,6 @@ extension ContentView: Configurable {
             )
         )
         infoView.isHidden = false
-        isSearch = false
     }
 }
 

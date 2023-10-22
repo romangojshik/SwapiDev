@@ -5,8 +5,7 @@
 //  Created by Roman on 9/2/23.
 //
 
-import Foundation
-import UIKit
+import SnapKit
 
 //MARK: - ContentFavouritesProtocol
 
