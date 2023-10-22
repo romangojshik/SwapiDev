@@ -21,68 +21,60 @@ public final class CoreDataManager: NSObject {
         appDelegate.persistentConatainer.viewContext
     }
     
-//    public func logCoreDataDBPath() {
-//        if let url =
-//            appDelegate.persistentConatainer.persistentStoreCoordinator.persistentStores.first?.url
-//        {
-//            print("DB url - \(url)")
-//        }
-//    }
-    
-    public func createPeople(id: Int32, name: String, gender: String) {
-        guard let peopleEntityDescription = NSEntityDescription.entity(forEntityName: "People", in: context) else { return }
-        let people = People(entity: peopleEntityDescription, insertInto: context)
-        people.id = id
-        people.name = name
-        people.gender = gender
+    public func createPerson(id: Int32, name: String, gender: String) {
+        guard let personEntityDescription = NSEntityDescription.entity(forEntityName: "Person", in: context) else { return }
+        let person = Person(entity: personEntityDescription, insertInto: context)
+        person.id = id
+        person.name = name
+        person.gender = gender
         
         appDelegate.saveContext()
     }
     
-    public func fetchPeoples() -> [People] {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "People")
+    public func fetchPeople() -> [Person] {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Person")
         do {
-            return (try? context.fetch(fetchRequest) as? [People]) ?? []
+            return (try? context.fetch(fetchRequest) as? [Person]) ?? []
         }
     }
     
-    public func fetchPeople(id: Int32) -> People? {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "People")
+    public func fetchPerson(id: Int32) -> Person? {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Person")
         do {
-            let peoples = try? context.fetch(fetchRequest) as? [People] ?? []
-            return peoples?.first(where: { $0.id == id })
+            let people = try? context.fetch(fetchRequest) as? [Person] ?? []
+            return people?.first(where: { $0.id == id })
         }
     }
     
-    public func updatePeople(id: Int32, name: String, gender: String) {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "People")
+    public func updatePerson(id: Int32, name: String, gender: String) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Person")
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
         do {
-            guard let peoples = try? context.fetch(fetchRequest) as? [People],
-                  let people =  peoples.first
+            guard let people = try? context.fetch(fetchRequest) as? [Person],
+                  let person =  people.first
             else { return }
-            people.name = name
-            people.gender = gender
+            person.name = name
+            person.gender = gender
         }
         appDelegate.saveContext()
     }
     
-    public func deleteAllPeoples() {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "People")
+    public func deleteAllPerson() {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Person")
         do {
-            let peoples = try? context.fetch(fetchRequest) as? [People] ?? []
-            peoples?.forEach { context.delete($0) }
+            let people = try? context.fetch(fetchRequest) as? [Person] ?? []
+            people?.forEach { context.delete($0) }
         }
         appDelegate.saveContext()
     }
     
-    public func deletePeople(id: Int32) {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "People")
+    public func deletePerson(id: Int32) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Person")
         do {
-            guard let peoples = try? context.fetch(fetchRequest) as? [People],
-                  let people = peoples.first(where: { $0.id == id })
+            guard let people = try? context.fetch(fetchRequest) as? [Person],
+                  let person = people.first(where: { $0.id == id })
             else { return }
-            context.delete(people)
+            context.delete(person)
         }
         appDelegate.saveContext()
     }

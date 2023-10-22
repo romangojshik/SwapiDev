@@ -43,9 +43,9 @@ public final class ContentView: UIView {
         $0.spacing = 15
     }
     
-    private lazy var peopleButton = UIButton().then {
+    private lazy var personButton = UIButton().then {
         $0.backgroundColor = .lightGray
-        $0.setImage(UIImage(named: "people"), for: .normal)
+        $0.setImage(UIImage(named: "person"), for: .normal)
         $0.layer.cornerRadius = 6
         $0.imageView?.contentMode = .scaleAspectFit
         $0.addTarget(self, action: #selector(peopleButtonDidTap), for: .touchUpInside)
@@ -113,7 +113,7 @@ public final class ContentView: UIView {
     private func addSubviews() {
         addSubview(titleLabel)
         addSubview(inputTextField)
-        horizontalStackView.addArrangedSubview(peopleButton)
+        horizontalStackView.addArrangedSubview(personButton)
         horizontalStackView.addArrangedSubview(planetButton)
         horizontalStackView.addArrangedSubview(starshipButton)
         addSubview(horizontalStackView)
@@ -161,9 +161,9 @@ public final class ContentView: UIView {
         configurePeopleButton()
         configurePlanetButton()
         configureStarshipButton()
-        peopleButton.backgroundColor = .blue
-        peopleButton.setImage(UIImage(named: "color_people"), for: .normal)
-        parameterForSearch = SearchURL.people
+        personButton.backgroundColor = .blue
+        personButton.setImage(UIImage(named: "color_person"), for: .normal)
+        parameterForSearch = SearchURL.person
         configureGetInfoButton(isEnabled: true)
     }
     
@@ -194,8 +194,8 @@ public final class ContentView: UIView {
     }
     
     private func configurePeopleButton() {
-        peopleButton.backgroundColor = .lightGray
-        peopleButton.setImage(UIImage(named: "people"), for: .normal)
+        personButton.backgroundColor = .lightGray
+        personButton.setImage(UIImage(named: "person"), for: .normal)
     }
     
     private func configurePlanetButton() {

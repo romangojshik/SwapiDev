@@ -1,5 +1,5 @@
 //
-//  PeopleViewModel.swift
+//  PersonViewModel.swift
 //  StarWars
 //
 //  Created by Roman on 9/14/23.
@@ -13,7 +13,7 @@ public struct ContentViewModel {
     public let name: String?
     public let favourite: Bool? = false
     
-    /// Model People
+    /// Model Person
     public let gender: String?
     
     /// Model Planet

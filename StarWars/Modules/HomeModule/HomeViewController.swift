@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private let service = Service()
+    private let apiService = ApiService()
     private var contentViewModel = ContentViewModel()
     
     override func viewDidLoad() {
@@ -51,23 +51,23 @@ class HomeViewController: UIViewController {
 extension HomeViewController: ContentViewProtocol {
     func getInfoButtonDidTap(inputText: String, parameterForSearch: SearchURL) {
         switch parameterForSearch {
-        case .people:
-            service.serviceCall(
-                PeopleModel.self,
+        case .person:
+            apiService.serviceCall(
+                PersonModel.self,
                 paramSearch: parameterForSearch,
                 name: inputText,
                 completion: { (response, error) in
                     guard let result = response?.results.first else { return }
-                    let peopleViewModel = ContentViewModel(
+                    let personViewModel = ContentViewModel(
                         name: result.name,
                         gender: result.gender
                     )
-                    self.contentView.configure(with: peopleViewModel)
+                    self.contentView.configure(with: personViewModel)
                     self.contentViewModel = .init(name: result.name, gender: result.gender)
                 }
             )
         case .planet:
-            service.serviceCall(
+            apiService.serviceCall(
                 PlanetModel.self,
                 paramSearch: parameterForSearch,
                 name: inputText,
@@ -88,11 +88,10 @@ extension HomeViewController: ContentViewProtocol {
     func fovouriteButtonTapped(isFovourite: Bool) {
         let id = UInt16.arc4random()
         
-        CoreDataManager.shared.createPeople(
+        CoreDataManager.shared.createPerson(
             id: Int32(id),
             name: contentViewModel.name ?? "",
             gender: contentViewModel.gender ?? ""
         )
     }
 }
-

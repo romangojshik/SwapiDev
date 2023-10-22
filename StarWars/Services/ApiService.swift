@@ -9,41 +9,10 @@ import Foundation
 import Alamofire
 
 enum SearchURL {
-    case people
+    case person
     case planet
     case starsShip
 }
-
-//enum StringURL: String, CustomStringConvertible {
-//    case luke = "Luke Skywalker"
-//    case yavin = "Yavin IV"
-//    case death = "Death Star"
-//
-//    var description: String {
-//        switch self {
-//        case .luke:
-//            return "people/1/"
-//        case .yavin:
-//            return "planets/3/"
-//        case .death:
-//            return "starships/9/"
-//        }
-//    }
-//
-//
-//    static func initialize(stringValue: String)-> StringURL? {
-//        switch stringValue {
-//        case StringURL.luke.description:
-//            return StringURL.luke
-//        case  StringURL.yavin.description:
-//            return StringURL.yavin
-//        case StringURL.death.description:
-//            return StringURL.death
-//        default:
-//            return nil
-//        }
-//    }
-//}
 
 struct Constants {
     struct APIDetails {
@@ -54,7 +23,7 @@ struct Constants {
     }
 }
 
-class Service {
+class ApiService {
     func serviceCall<T: Codable>(
         _ objectType: T.Type,
         paramSearch: SearchURL,
@@ -64,7 +33,7 @@ class Service {
         var fullPathURL: String = ""
 
         switch paramSearch {
-        case .people:
+        case .person:
             fullPathURL = Constants.APIDetails.APIPath + Constants.APIDetails.peoplePath
         case .planet:
             fullPathURL = Constants.APIDetails.APIPath + Constants.APIDetails.planetsPath

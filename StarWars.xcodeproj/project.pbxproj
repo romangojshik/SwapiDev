@@ -14,10 +14,12 @@
 		304066A62AB0BB3300F8D864 /* PlanetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304066A52AB0BB3300F8D864 /* PlanetModel.swift */; };
 		304ABF8F2AAAFF2700F3D4F0 /* GeneralResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304ABF8E2AAAFF2700F3D4F0 /* GeneralResponse.swift */; };
 		304ABF922AAF57BE00F3D4F0 /* InfoValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304ABF912AAF57BE00F3D4F0 /* InfoValueView.swift */; };
+		304E434D2AE5362300510E9A /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 304E434B2AE5362300510E9A /* CoreData.xcdatamodeld */; };
+		304E43552AE536E800510E9A /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304E43532AE536E800510E9A /* Person+CoreDataProperties.swift */; };
 		30A159E02AA0E8E9003766BE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A159DF2AA0E8E9003766BE /* HomeViewController.swift */; };
 		30A159E52AA0E99C003766BE /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A159E42AA0E99C003766BE /* FavouritesViewController.swift */; };
-		30A159ED2AA101CA003766BE /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A159EC2AA101CA003766BE /* Service.swift */; };
-		30A159F22AA1132E003766BE /* PeopleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A159F12AA1132D003766BE /* PeopleModel.swift */; };
+		30A159ED2AA101CA003766BE /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A159EC2AA101CA003766BE /* ApiService.swift */; };
+		30A159F22AA1132E003766BE /* PersonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A159F12AA1132D003766BE /* PersonModel.swift */; };
 		30A159F72AA23EA8003766BE /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A159F62AA23EA8003766BE /* ProgressHUD.swift */; };
 		30A15A0F2AA3BC12003766BE /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A15A0E2AA3BC12003766BE /* InfoView.swift */; };
 		30A15A832AA3C332003766BE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30B3C3A92AA0BB12002DE181 /* Info.plist */; };
@@ -32,7 +34,6 @@
 		30BF89B92AB21ED200407E1F /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BF89B82AB21ED200407E1F /* Configurable.swift */; };
 		30BF89C02AB33A1B00407E1F /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BF89BF2AB33A1B00407E1F /* ContentViewModel.swift */; };
 		30BF89CA2AB89FA100407E1F /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BF89C92AB89FA100407E1F /* StorageManager.swift */; };
-		30BF89D92AB8BCBF00407E1F /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 30BF89D72AB8BCBF00407E1F /* CoreData.xcdatamodeld */; };
 		72DFF5F914E4A117D9BAFC1D /* Pods_StarWars_StarWarsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F06E0631C59044C56563CB29 /* Pods_StarWars_StarWarsUITests.framework */; };
 		ABDD659B4F8A9FBD5E6A828F /* Pods_StarWarsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAACEB168549C620A636148 /* Pods_StarWarsTests.framework */; };
 		D42F37F8E9C6228CEA326DC7 /* Pods_StarWars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 057596D8C72C6CC1042339D8 /* Pods_StarWars.framework */; };
@@ -64,10 +65,12 @@
 		304066A52AB0BB3300F8D864 /* PlanetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetModel.swift; sourceTree = "<group>"; };
 		304ABF8E2AAAFF2700F3D4F0 /* GeneralResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralResponse.swift; sourceTree = "<group>"; };
 		304ABF912AAF57BE00F3D4F0 /* InfoValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoValueView.swift; sourceTree = "<group>"; };
+		304E434C2AE5362300510E9A /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
+		304E43532AE536E800510E9A /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Person+CoreDataProperties.swift"; path = "StarWars/Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		30A159DF2AA0E8E9003766BE /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		30A159E42AA0E99C003766BE /* FavouritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
-		30A159EC2AA101CA003766BE /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
-		30A159F12AA1132D003766BE /* PeopleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleModel.swift; sourceTree = "<group>"; };
+		30A159EC2AA101CA003766BE /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		30A159F12AA1132D003766BE /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
 		30A159F62AA23EA8003766BE /* ProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
 		30A15A0E2AA3BC12003766BE /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		30A15AA12AA3C83F003766BE /* Then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
@@ -87,7 +90,6 @@
 		30BF89B82AB21ED200407E1F /* Configurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
 		30BF89BF2AB33A1B00407E1F /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		30BF89C92AB89FA100407E1F /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
-		30BF89D82AB8BCBF00407E1F /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 		4245796F8A8B0B0DC17E9EBB /* Pods-StarWars.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StarWars.release.xcconfig"; path = "Target Support Files/Pods-StarWars/Pods-StarWars.release.xcconfig"; sourceTree = "<group>"; };
 		6CAACEB168549C620A636148 /* Pods_StarWarsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StarWarsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8902E067AACE9A35B66DFC38 /* Pods-StarWars-StarWarsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StarWars-StarWarsUITests.release.xcconfig"; path = "Target Support Files/Pods-StarWars-StarWarsUITests/Pods-StarWars-StarWarsUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -183,7 +185,7 @@
 		30A15A092AA3B82E003766BE /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				30A159F12AA1132D003766BE /* PeopleModel.swift */,
+				30A159F12AA1132D003766BE /* PersonModel.swift */,
 				304ABF8E2AAAFF2700F3D4F0 /* GeneralResponse.swift */,
 				304066A52AB0BB3300F8D864 /* PlanetModel.swift */,
 			);
@@ -221,7 +223,8 @@
 		30B3C38F2AA0BB0E002DE181 = {
 			isa = PBXGroup;
 			children = (
-				30BF89D72AB8BCBF00407E1F /* CoreData.xcdatamodeld */,
+				304E43532AE536E800510E9A /* Person+CoreDataProperties.swift */,
+				304E434B2AE5362300510E9A /* CoreData.xcdatamodeld */,
 				30B3C39A2AA0BB0F002DE181 /* StarWars */,
 				30B3C3B12AA0BB12002DE181 /* StarWarsTests */,
 				30B3C3BC2AA0BB12002DE181 /* StarWarsUITests */,
@@ -293,7 +296,7 @@
 		30BF89BD2AB3341B00407E1F /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				30A159EC2AA101CA003766BE /* Service.swift */,
+				30A159EC2AA101CA003766BE /* ApiService.swift */,
 				30BF89C92AB89FA100407E1F /* StorageManager.swift */,
 			);
 			path = Services;
@@ -571,9 +574,8 @@
 			files = (
 				30BF89CA2AB89FA100407E1F /* StorageManager.swift in Sources */,
 				30BF89B92AB21ED200407E1F /* Configurable.swift in Sources */,
-				30BF89D92AB8BCBF00407E1F /* CoreData.xcdatamodeld in Sources */,
 				30BF89C02AB33A1B00407E1F /* ContentViewModel.swift in Sources */,
-				30A159F22AA1132E003766BE /* PeopleModel.swift in Sources */,
+				30A159F22AA1132E003766BE /* PersonModel.swift in Sources */,
 				304ABF8F2AAAFF2700F3D4F0 /* GeneralResponse.swift in Sources */,
 				3040130A2ABCC39B001E2537 /* InfoFavouritesView.swift in Sources */,
 				304ABF922AAF57BE00F3D4F0 /* InfoValueView.swift in Sources */,
@@ -584,13 +586,15 @@
 				304013082ABCA505001E2537 /* Space.swift in Sources */,
 				30B3C3A02AA0BB0F002DE181 /* MainTabBarViewController.swift in Sources */,
 				30A159F72AA23EA8003766BE /* ProgressHUD.swift in Sources */,
+				304E434D2AE5362300510E9A /* CoreData.xcdatamodeld in Sources */,
 				30B3C39C2AA0BB0F002DE181 /* AppDelegate.swift in Sources */,
 				30B3C39E2AA0BB0F002DE181 /* SceneDelegate.swift in Sources */,
 				30A159E52AA0E99C003766BE /* FavouritesViewController.swift in Sources */,
 				30A159E02AA0E8E9003766BE /* HomeViewController.swift in Sources */,
+				304E43552AE536E800510E9A /* Person+CoreDataProperties.swift in Sources */,
 				30A15A0F2AA3BC12003766BE /* InfoView.swift in Sources */,
 				30A15AA22AA3C83F003766BE /* Then.swift in Sources */,
-				30A159ED2AA101CA003766BE /* Service.swift in Sources */,
+				30A159ED2AA101CA003766BE /* ApiService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -908,13 +912,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		30BF89D72AB8BCBF00407E1F /* CoreData.xcdatamodeld */ = {
+		304E434B2AE5362300510E9A /* CoreData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				30BF89D82AB8BCBF00407E1F /* CoreData.xcdatamodel */,
+				304E434C2AE5362300510E9A /* CoreData.xcdatamodel */,
 			);
-			currentVersion = 30BF89D82AB8BCBF00407E1F /* CoreData.xcdatamodel */;
-			path = CoreData.xcdatamodeld;
+			currentVersion = 304E434C2AE5362300510E9A /* CoreData.xcdatamodel */;
+			name = CoreData.xcdatamodeld;
+			path = StarWars/Services/CoreData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

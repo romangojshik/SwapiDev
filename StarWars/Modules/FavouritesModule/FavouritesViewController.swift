@@ -19,7 +19,7 @@ class FavouritesViewController: UIViewController {
     // MARK: - Private Properties
     
     private var contentViewModel = ContentViewModel()
-    private let service = Service()
+    private let apiService = ApiService()
     private var isReloadContent = false
     
     // MARK: - UIViewController
@@ -52,7 +52,7 @@ class FavouritesViewController: UIViewController {
     }
     
     private func deleteFromDB(id: Int) {
-        CoreDataManager.shared.deletePeople(id: Int32(id))
+        CoreDataManager.shared.deletePerson(id: Int32(id))
         contentView.reloadData()
         configure(with: contentViewModel)
     }
@@ -64,16 +64,16 @@ extension FavouritesViewController: Configurable {
     public typealias ViewModel = ContentViewModel
     
     public func configure(with viewModel: ViewModel) {
-        let peoples = CoreDataManager.shared.fetchPeoples()
-        peoples.forEach { people in
-            switch people {
-            case people as People:
+        let people = CoreDataManager.shared.fetchPeople()
+        people.forEach { person in
+            switch person {
+            case person as Person:
                 self.contentView.configure(
                     with: .init(
-                        id: Int(people.id),
+                        id: Int(person.id),
                         infoValueViewModels: [
-                            .init(title: "Name: ", subtitle: people.name ?? ""),
-                            .init(title: "Gender: ", subtitle: people.gender ?? "")
+                            .init(title: "Name: ", subtitle: person.name ?? ""),
+                            .init(title: "Gender: ", subtitle: person.gender ?? "")
                         ]
                     )
                 )
