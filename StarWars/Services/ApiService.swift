@@ -7,10 +7,10 @@
 
 import Alamofire
 
-enum SearchURL {
+internal enum SearchURL {
     case person
     case planet
-    case starsShip
+    case starship
 }
 
 struct Constants {
@@ -18,7 +18,7 @@ struct Constants {
         static let APIPath = "https://swapi.dev/api/"
         static let peoplePath = "people/"
         static let planetPath = "planets/"
-        static let starsShipPath = "starsShips/"
+        static let starShipPath = "starships/"
     }
 }
 
@@ -36,8 +36,8 @@ class ApiService {
             fullPathURL = Constants.APIDetails.APIPath + Constants.APIDetails.peoplePath
         case .planet:
             fullPathURL = Constants.APIDetails.APIPath + Constants.APIDetails.planetPath
-        case .starsShip:
-            fullPathURL = Constants.APIDetails.APIPath + Constants.APIDetails.starsShipPath
+        case .starship:
+            fullPathURL = Constants.APIDetails.APIPath + Constants.APIDetails.starShipPath
         }
         
         let paramPath = ["search": name]

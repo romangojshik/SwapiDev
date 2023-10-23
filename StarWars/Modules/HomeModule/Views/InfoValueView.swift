@@ -5,8 +5,7 @@
 //  Created by Roman on 9/2/23.
 //
 
-import Foundation
-import UIKit
+import SnapKit
 
 public final class InfoValueView: UIView {
     
@@ -18,13 +17,11 @@ public final class InfoValueView: UIView {
         $0.distribution = .fill
         $0.spacing = 15
     }
-    
-    private lazy var titleLabel = UILabel().then {
-        $0.text = "Value: "
-    }
+        
+    private lazy var titleLabel = UILabel()
     
     private lazy var subtitleLabel = UILabel().then {
-        $0.text = "-"
+        $0.numberOfLines = 0
     }
     
     // MARK: - UIView
@@ -71,5 +68,15 @@ extension InfoValueView: Configurable {
     public func configure(with viewModel: ViewModel) {
         titleLabel.text = viewModel.title
         subtitleLabel.text = viewModel.subtitle
+        
+        let titleLabelWidht = titleLabel.intrinsicContentSize.width
+        let subtitleLabelWidht = UIScreen.main.bounds.size.width - 30 - 20 - 15 - 20 - 24 - titleLabelWidht
+
+        titleLabel.snp.makeConstraints { make in
+            make.width.equalTo(titleLabelWidht)
+        }
+        subtitleLabel.snp.makeConstraints { make in
+            make.width.equalTo(subtitleLabelWidht)
+        }
     }
 }

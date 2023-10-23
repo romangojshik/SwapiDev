@@ -5,8 +5,9 @@
 //  Created by Roman on 9/2/23.
 //
 
-import Foundation
-import UIKit
+import SnapKit
+
+// MARK: - InfoViewProtocol
 
 public protocol InfoViewProtocol: AnyObject {
     func fovouriteButtonTapped(isFovourite: Bool)
@@ -14,7 +15,7 @@ public protocol InfoViewProtocol: AnyObject {
 
 public final class InfoView: UIView {
     // MARK: - Public Properties
-
+    
     weak var delegate: InfoViewProtocol?
     
     // MARK: - Subview Properties
@@ -30,7 +31,7 @@ public final class InfoView: UIView {
         $0.distribution = .fill
         $0.spacing = 15
     }
-        
+    
     // MARK: - Private Properties
     
     private var isAddInFovourites = false
@@ -63,10 +64,12 @@ public final class InfoView: UIView {
     
     private func makeConstraints() {
         fovouriteButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(grid.space20)
-            make.trailing.equalToSuperview().inset(20)
+            make.top.equalToSuperview().inset(10)
+            make.leading.equalTo(verticalStackView.snp.trailing).offset(10)
+            make.trailing.equalToSuperview().inset(10)
             make.size.equalTo(24)
         }
+        
         verticalStackView.snp.makeConstraints { make in
             make.top.bottom.leading.equalToSuperview().inset(10)
         }
@@ -100,6 +103,8 @@ public final class InfoView: UIView {
     }
     
 }
+
+// MARK: - Configurable
 
 extension InfoView: Configurable {
     public struct ViewModel {

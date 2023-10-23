@@ -16,9 +16,9 @@ protocol ContentViewProtocol: AnyObject {
 
 public final class ContentView: UIView {
     // MARK: - Public Properties
-
+    
     weak var delegate: ContentViewProtocol?
-
+    
     // MARK: - Subview Properties
     
     private lazy var titleLabel = UILabel().then {
@@ -84,7 +84,7 @@ public final class ContentView: UIView {
         $0.delegate = self
         $0.isHidden = true
     }
-        
+    
     // MARK: - Private Properties
     
     private var inputString: String = ""
@@ -188,7 +188,7 @@ public final class ContentView: UIView {
         configurePlanetButton()
         starshipButton.backgroundColor = .blue
         starshipButton.setImage(UIImage(named: "color_starship"), for: .normal)
-        parameterForSearch = SearchURL.starsShip
+        parameterForSearch = SearchURL.starship
         configureGetInfoButton(isEnabled: true)
     }
     
@@ -243,7 +243,7 @@ extension ContentView: UITextFieldDelegate {
             inputString = textField.text ?? ""
             infoView.isHidden = true
             parameterForSearch = nil
-
+            
             configurePersonButton()
             configurePlanetButton()
             configureStarshipButton()
@@ -306,7 +306,10 @@ extension ContentView: Configurable {
                 with: .init(
                     id: viewModel.id ?? 0,
                     infoValueViewModels: [
-                        .init(title: "Name: ", subtitle: viewModel.name ?? "")
+                        .init(title: "Name: ", subtitle: viewModel.name ?? ""),
+                        .init(title: "Model: ", subtitle: viewModel.model ?? ""),
+                        .init(title: "Manufacturer: ", subtitle: viewModel.manufacturer ?? ""),
+                        .init(title: "Passengers: ", subtitle: viewModel.passengers ?? "")
                     ]
                 )
             )

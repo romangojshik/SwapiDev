@@ -59,9 +59,9 @@ extension HomeViewController: ContentViewProtocol {
                 completion: { (response, error) in
                     guard let result = response?.results.first else { return }
                     let personViewModel = ContentViewModel(
+                        type: .person,
                         name: result.name,
-                        gender: result.gender,
-                        type: .person
+                        gender: result.gender
                     )
                     self.contentView.configure(with: personViewModel)
                     self.contentViewModel = .init(name: result.name, gender: result.gender)
@@ -75,21 +75,27 @@ extension HomeViewController: ContentViewProtocol {
                 completion: { (response, error) in
                     guard let result = response?.results.first else { return }
                     let peopleViewModel = ContentViewModel(
+                        type: .planet,
                         name: result.name,
-                        diameter: result.diameter,
-                        type: .planet
+                        diameter: result.diameter
                     )
                     self.contentView.configure(with: peopleViewModel)
                 }
             )
-        case .starsShip:
+        case .starship:
             apiService.serviceCall(
-                StarsShipModel.self,
+                StarshipModel.self,
                 paramSearch: parameterForSearch,
                 name: inputText,
                 completion: { (response, error) in
                     guard let result = response?.results.first else { return }
-                    let peopleViewModel = ContentViewModel(name: result.name, type: .starsShip)
+                    let peopleViewModel = ContentViewModel(
+                        type: .starsShip,
+                        name: result.name,
+                        model: result.model,
+                        manufacturer: result.manufacturer,
+                        passengers: result.passengers
+                    )
                     self.contentView.configure(with: peopleViewModel)
                 }
             )

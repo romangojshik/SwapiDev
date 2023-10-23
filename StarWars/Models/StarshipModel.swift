@@ -7,6 +7,10 @@
 
 import Foundation
 
-struct StarsShipModel: Codable {
+struct StarshipModel: Codable {
     let name: String
+    let model: String
+    let manufacturer: String
+    let passengers: String
+    
 }

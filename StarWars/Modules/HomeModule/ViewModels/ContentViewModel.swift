@@ -16,11 +16,10 @@ public enum SearchType {
 
 public struct ContentViewModel {
     /// General properties
+    public let type: SearchType?
     public let id: Int?
     public let name: String?
     public let favourite: Bool? = false
-    public let type: SearchType?
-
     
     /// Model Person
     public let gender: String?
@@ -30,20 +29,37 @@ public struct ContentViewModel {
     public let diameter: String?
     public let population: String?
     
+    /// Model Starship
+    let model: String?
+    let manufacturer: String?
+    let passengers: String?
+    
     init(
+        type: SearchType = SearchType.none,
         id: Int? = nil,
         name: String? = nil,
+
         gender: String?  = nil,
         diameter: String? = nil,
         population: String? = nil,
-        people: [Person] = [],
-        type: SearchType = SearchType.none
+        
+        model: String? = nil,
+        manufacturer: String? = nil,
+        passengers: String? = nil,
+        
+        people: [Person] = []
     ) {
+        self.type = type
         self.id = id
         self.name = name
+    
         self.gender = gender
+        
         self.diameter = diameter
         self.population = population
-        self.type = type
+        
+        self.model = model
+        self.manufacturer = manufacturer
+        self.passengers = passengers
     }
 }
