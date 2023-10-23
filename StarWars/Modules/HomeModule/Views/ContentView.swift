@@ -160,7 +160,6 @@ public final class ContentView: UIView {
         isPersonButtonEnabled = true
         isPlanetButtonEnabled = false
         isStarshipButtonEnabled = false
-        configurePersonButton()
         configurePlanetButton()
         configureStarshipButton()
         personButton.backgroundColor = .blue
@@ -174,7 +173,6 @@ public final class ContentView: UIView {
         isPlanetButtonEnabled = true
         isStarshipButtonEnabled = false
         configurePersonButton()
-        configurePlanetButton()
         configureStarshipButton()
         planetButton.backgroundColor = .blue
         planetButton.setImage(UIImage(named: "color_planet"), for: .normal)
@@ -188,7 +186,6 @@ public final class ContentView: UIView {
         isStarshipButtonEnabled = true
         configurePersonButton()
         configurePlanetButton()
-        configureStarshipButton()
         starshipButton.backgroundColor = .blue
         starshipButton.setImage(UIImage(named: "color_starship"), for: .normal)
         parameterForSearch = SearchURL.starsShip
@@ -224,15 +221,21 @@ public final class ContentView: UIView {
             getInfoButton.setTitleColor(.lightText, for: .normal)
             getInfoButton.isEnabled = false
             
-            isPersonButtonEnabled = false
-            isPlanetButtonEnabled = false
-            isStarshipButtonEnabled = false
+            configureParamButton(isEnabled: false)
             configurePersonButton()
             configurePlanetButton()
             configureStarshipButton()
         }
     }
+    
+    private func configureParamButton(isEnabled: Bool) {
+        personButton.isUserInteractionEnabled = isEnabled
+        planetButton.isUserInteractionEnabled = isEnabled
+        starshipButton.isUserInteractionEnabled = isEnabled
+    }
 }
+
+// MARK: - UITextFieldDelegate
 
 extension ContentView: UITextFieldDelegate {
     public func textFieldDidChangeSelection(_ textField: UITextField) {
@@ -240,27 +243,33 @@ extension ContentView: UITextFieldDelegate {
             inputString = textField.text ?? ""
             infoView.isHidden = true
             parameterForSearch = nil
-            
-            isPersonButtonEnabled = false
-            isPlanetButtonEnabled = false
-            isStarshipButtonEnabled = false
-            
-            personButton.isUserInteractionEnabled = false
-            planetButton.isUserInteractionEnabled = false
-            starshipButton.isUserInteractionEnabled = false
-            
+
             configurePersonButton()
             configurePlanetButton()
             configureStarshipButton()
+            configureParamButton(isEnabled: false)
+            configureGetInfoButton(isEnabled: false)
             
             return
         }
         inputString = textField.text ?? ""
+        configureParamButton(isEnabled: true)
+        guard parameterForSearch != nil else { return }
         configureGetInfoButton(isEnabled: true)
-        personButton.isUserInteractionEnabled = true
-        planetButton.isUserInteractionEnabled = true
-        starshipButton.isUserInteractionEnabled = true
     }
+    
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if
+            string == "",
+            textField.text?.count == 3
+        {
+            parameterForSearch = nil
+            configureParamButton(isEnabled: false)
+            configureGetInfoButton(isEnabled: false)
+        }
+        return true
+    }
+
 }
 
 // MARK: - Configurable
