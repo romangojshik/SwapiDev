@@ -7,11 +7,20 @@
 
 import Foundation
 
+public enum SearchType {
+    case person
+    case planet
+    case starsShip
+    case none
+}
+
 public struct ContentViewModel {
     /// General properties
     public let id: Int?
     public let name: String?
     public let favourite: Bool? = false
+    public let type: SearchType?
+
     
     /// Model Person
     public let gender: String?
@@ -27,12 +36,14 @@ public struct ContentViewModel {
         gender: String?  = nil,
         diameter: String? = nil,
         population: String? = nil,
-        people: [Person] = []
+        people: [Person] = [],
+        type: SearchType = SearchType.none
     ) {
         self.id = id
         self.name = name
         self.gender = gender
         self.diameter = diameter
         self.population = population
+        self.type = type
     }
 }

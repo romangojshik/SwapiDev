@@ -17,8 +17,8 @@ struct Constants {
     struct APIDetails {
         static let APIPath = "https://swapi.dev/api/"
         static let peoplePath = "people/"
-        static let planetsPath = "planets"
-        static let starsShipsPath = "starsShips"
+        static let planetPath = "planets/"
+        static let starsShipPath = "starsShips/"
     }
 }
 
@@ -35,9 +35,9 @@ class ApiService {
         case .person:
             fullPathURL = Constants.APIDetails.APIPath + Constants.APIDetails.peoplePath
         case .planet:
-            fullPathURL = Constants.APIDetails.APIPath + Constants.APIDetails.planetsPath
+            fullPathURL = Constants.APIDetails.APIPath + Constants.APIDetails.planetPath
         case .starsShip:
-            fullPathURL = Constants.APIDetails.APIPath + Constants.APIDetails.starsShipsPath
+            fullPathURL = Constants.APIDetails.APIPath + Constants.APIDetails.starsShipPath
         }
         
         let paramPath = ["search": name]

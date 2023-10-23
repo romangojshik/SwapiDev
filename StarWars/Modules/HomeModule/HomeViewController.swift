@@ -60,7 +60,8 @@ extension HomeViewController: ContentViewProtocol {
                     guard let result = response?.results.first else { return }
                     let personViewModel = ContentViewModel(
                         name: result.name,
-                        gender: result.gender
+                        gender: result.gender,
+                        type: .person
                     )
                     self.contentView.configure(with: personViewModel)
                     self.contentViewModel = .init(name: result.name, gender: result.gender)
@@ -75,13 +76,23 @@ extension HomeViewController: ContentViewProtocol {
                     guard let result = response?.results.first else { return }
                     let peopleViewModel = ContentViewModel(
                         name: result.name,
-                        diameter: result.diameter
+                        diameter: result.diameter,
+                        type: .planet
                     )
                     self.contentView.configure(with: peopleViewModel)
                 }
             )
         case .starsShip:
-            print("")
+            apiService.serviceCall(
+                StarsShipModel.self,
+                paramSearch: parameterForSearch,
+                name: inputText,
+                completion: { (response, error) in
+                    guard let result = response?.results.first else { return }
+                    let peopleViewModel = ContentViewModel(name: result.name, type: .starsShip)
+                    self.contentView.configure(with: peopleViewModel)
+                }
+            )
         }
     }
     

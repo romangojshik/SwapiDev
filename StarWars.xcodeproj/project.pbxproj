@@ -34,6 +34,7 @@
 		30BF89B92AB21ED200407E1F /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BF89B82AB21ED200407E1F /* Configurable.swift */; };
 		30BF89C02AB33A1B00407E1F /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BF89BF2AB33A1B00407E1F /* ContentViewModel.swift */; };
 		30BF89CA2AB89FA100407E1F /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BF89C92AB89FA100407E1F /* StorageManager.swift */; };
+		30D75E0B2AE6AAE100E8BA63 /* StarsShipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D75E0A2AE6AAE100E8BA63 /* StarsShipModel.swift */; };
 		72DFF5F914E4A117D9BAFC1D /* Pods_StarWars_StarWarsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F06E0631C59044C56563CB29 /* Pods_StarWars_StarWarsUITests.framework */; };
 		ABDD659B4F8A9FBD5E6A828F /* Pods_StarWarsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAACEB168549C620A636148 /* Pods_StarWarsTests.framework */; };
 		D42F37F8E9C6228CEA326DC7 /* Pods_StarWars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 057596D8C72C6CC1042339D8 /* Pods_StarWars.framework */; };
@@ -90,6 +91,7 @@
 		30BF89B82AB21ED200407E1F /* Configurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
 		30BF89BF2AB33A1B00407E1F /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		30BF89C92AB89FA100407E1F /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		30D75E0A2AE6AAE100E8BA63 /* StarsShipModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsShipModel.swift; sourceTree = "<group>"; };
 		4245796F8A8B0B0DC17E9EBB /* Pods-StarWars.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StarWars.release.xcconfig"; path = "Target Support Files/Pods-StarWars/Pods-StarWars.release.xcconfig"; sourceTree = "<group>"; };
 		6CAACEB168549C620A636148 /* Pods_StarWarsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StarWarsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8902E067AACE9A35B66DFC38 /* Pods-StarWars-StarWarsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StarWars-StarWarsUITests.release.xcconfig"; path = "Target Support Files/Pods-StarWars-StarWarsUITests/Pods-StarWars-StarWarsUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				30A159F12AA1132D003766BE /* PersonModel.swift */,
 				304ABF8E2AAAFF2700F3D4F0 /* GeneralResponse.swift */,
 				304066A52AB0BB3300F8D864 /* PlanetModel.swift */,
+				30D75E0A2AE6AAE100E8BA63 /* StarsShipModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				304ABF8F2AAAFF2700F3D4F0 /* GeneralResponse.swift in Sources */,
 				3040130A2ABCC39B001E2537 /* InfoFavouritesView.swift in Sources */,
 				304ABF922AAF57BE00F3D4F0 /* InfoValueView.swift in Sources */,
+				30D75E0B2AE6AAE100E8BA63 /* StarsShipModel.swift in Sources */,
 				304013042ABC7682001E2537 /* ContentFavouritesView.swift in Sources */,
 				304066A62AB0BB3300F8D864 /* PlanetModel.swift in Sources */,
 				3040130C2ABDA111001E2537 /* UInt16.swift in Sources */,

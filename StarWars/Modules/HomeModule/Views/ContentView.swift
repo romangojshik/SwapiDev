@@ -5,8 +5,9 @@
 //  Created by Roman on 9/2/23.
 //
 
-import Foundation
-import UIKit
+import SnapKit
+
+// MARK: - ContentViewProtocol
 
 protocol ContentViewProtocol: AnyObject {
     func getInfoButtonDidTap(inputText: String, parameterForSearch: SearchURL)
@@ -153,7 +154,6 @@ public final class ContentView: UIView {
     @objc private func getInfo() {
         guard let parameter = parameterForSearch  else { return }
         delegate?.getInfoButtonDidTap(inputText: inputString, parameterForSearch: parameter)
-        inputString = ""
     }
     
     @objc private func peopleButtonDidTap() {
@@ -260,16 +260,17 @@ extension ContentView: UITextFieldDelegate {
     
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if
+            let count = textField.text?.count,
             string == "",
-            textField.text?.count == 3
+            count <= 3
         {
             parameterForSearch = nil
+            infoView.isHidden = true
             configureParamButton(isEnabled: false)
             configureGetInfoButton(isEnabled: false)
         }
         return true
     }
-
 }
 
 // MARK: - Configurable
@@ -278,15 +279,41 @@ extension ContentView: Configurable {
     public typealias ViewModel = ContentViewModel
     
     public func configure(with viewModel: ViewModel) {
-        infoView.configure(
-            with: .init(
-                id: viewModel.id ?? 0,
-                infoValueViewModels: [
-                    .init(title: "Name: ", subtitle: viewModel.name ?? ""),
-                    .init(title: "Gender: ", subtitle: viewModel.gender ?? "")
-                ]
+        
+        switch viewModel.type {
+        case .person:
+            infoView.configure(
+                with: .init(
+                    id: viewModel.id ?? 0,
+                    infoValueViewModels: [
+                        .init(title: "Name: ", subtitle: viewModel.name ?? ""),
+                        .init(title: "Gender: ", subtitle: viewModel.gender ?? "")
+                    ]
+                )
             )
-        )
+        case .planet:
+            infoView.configure(
+                with: .init(
+                    id: viewModel.id ?? 0,
+                    infoValueViewModels: [
+                        .init(title: "Name: ", subtitle: viewModel.name ?? ""),
+                        .init(title: "Diameter: ", subtitle: viewModel.diameter ?? "")
+                    ]
+                )
+            )
+        case .starsShip:
+            infoView.configure(
+                with: .init(
+                    id: viewModel.id ?? 0,
+                    infoValueViewModels: [
+                        .init(title: "Name: ", subtitle: viewModel.name ?? "")
+                    ]
+                )
+            )
+        default:
+            break
+        }
+        
         infoView.isHidden = false
     }
 }
