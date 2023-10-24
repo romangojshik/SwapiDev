@@ -92,7 +92,7 @@ public final class CoreDataManager: NSObject {
         appDelegate.saveContext()
     }
     
-    ///Starship
+    /// Starship
     public func createStarship(
         id: Int32,
         name: String,
@@ -100,8 +100,8 @@ public final class CoreDataManager: NSObject {
         manufacturer: String,
         passengers: String
     ) {
-        guard let personEntityDescription = NSEntityDescription.entity(forEntityName: "Starship", in: context) else { return }
-        let starship = Starship(entity: personEntityDescription, insertInto: context)
+        guard let starshipEntityDescription = NSEntityDescription.entity(forEntityName: "Starship", in: context) else { return }
+        let starship = Starship(entity: starshipEntityDescription, insertInto: context)
         starship.id = id
         starship.name = name
         starship.model = model

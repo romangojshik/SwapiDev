@@ -1,5 +1,5 @@
 //
-//  InfoView.swift
+//  InfoValueView.swift
 //  StarWars
 //
 //  Created by Roman on 9/2/23.
@@ -58,7 +58,6 @@ public final class InfoValueView: UIView {
 }
 
 // MARK: - Configurable
-
 extension InfoValueView: Configurable {
     public struct ViewModel {
         let title: String

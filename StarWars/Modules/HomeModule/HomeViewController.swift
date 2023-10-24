@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Alamofire
 
 class HomeViewController: UIViewController {
     // MARK: - Public Properties
@@ -47,9 +46,8 @@ class HomeViewController: UIViewController {
 }
 
 // MARK: - ContentViewProtocol
-
 extension HomeViewController: ContentViewProtocol {
-    func getInfoButtonDidTap(inputText: String, parameterForSearch: SearchURL) {
+    func getInfoButtonDidTap(inputText: String, parameterForSearch: SearchType) {
         switch parameterForSearch {
         case .person:
             apiService.serviceCall(
@@ -64,7 +62,7 @@ extension HomeViewController: ContentViewProtocol {
                         gender: result.gender
                     )
                     self.contentView.configure(with: personViewModel)
-                    self.contentViewModel = .init(name: result.name, gender: result.gender)
+                    self.contentViewModel = .init(type: .person, name: result.name, gender: result.gender)
                 }
             )
         case .planet:
@@ -89,34 +87,74 @@ extension HomeViewController: ContentViewProtocol {
                 name: inputText,
                 completion: { (response, error) in
                     guard let result = response?.results.first else { return }
-                    let peopleViewModel = ContentViewModel(
-                        type: .starsShip,
+                    let starshipViewModel = ContentViewModel(
+                        type: .starship,
                         name: result.name,
                         model: result.model,
                         manufacturer: result.manufacturer,
                         passengers: result.passengers
                     )
-                    self.contentView.configure(with: peopleViewModel)
+                    self.contentView.configure(with: starshipViewModel)
+                    self.contentViewModel = .init(
+                        type: .starship,
+                        name: result.name,
+                        model: result.model,
+                        manufacturer: result.manufacturer,
+                        passengers: result.passengers
+                    )
                 }
             )
+        case .none:
+            break
         }
     }
     
-    func fovouriteButtonTapped(isFovourite: Bool) {
-        let people = CoreDataManager.shared.fetchPeople()
-        guard people.first(where: { $0.name == contentViewModel.name}) == nil else { return }
+    func fovouriteButtonTapped(isFovourite: Bool, type: SearchType) {
+        switch type {
+        case .person:
+            let people = CoreDataManager.shared.fetchPeople()
+            guard people.first(where: { $0.name == contentViewModel.name}) == nil else { return }
+            
+            guard
+                let name = contentViewModel.name,
+                let gender = contentViewModel.gender
+            else { return }
+            
+            let id = UInt16.arc4random()
+            CoreDataManager.shared.createPerson(
+                id: Int32(id),
+                name: name,
+                gender: gender
+            )
+            CoreDataManager.shared.isUpdate = true
+            
+        case .planet:
+            print("")
+            
+        case .starship:
+            let starships = CoreDataManager.shared.fetchStarships()
+            guard starships.first(where: { $0.name == contentViewModel.name}) == nil else { return }
+            
+            guard
+                let name = contentViewModel.name,
+                let model = contentViewModel.model,
+                let manufacturer = contentViewModel.manufacturer,
+                let passengers = contentViewModel.passengers
+            else { return }
+            
+            let id = UInt16.arc4random()
+            CoreDataManager.shared.createStarship(
+                id: Int32(id),
+                name: name,
+                model: model,
+                manufacturer: manufacturer,
+                passengers: passengers
+            )
+            CoreDataManager.shared.isUpdate = true
+            
+        default:
+            break
+        }
         
-        guard
-            let name = contentViewModel.name,
-            let gender = contentViewModel.gender
-        else { return }
-        
-        let id = UInt16.arc4random()
-        CoreDataManager.shared.createPerson(
-            id: Int32(id),
-            name: name,
-            gender: gender
-        )
-        CoreDataManager.shared.isUpdate = true
     }
 }

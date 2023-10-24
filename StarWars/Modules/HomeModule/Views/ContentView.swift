@@ -8,10 +8,9 @@
 import SnapKit
 
 // MARK: - ContentViewProtocol
-
 protocol ContentViewProtocol: AnyObject {
-    func getInfoButtonDidTap(inputText: String, parameterForSearch: SearchURL)
-    func fovouriteButtonTapped(isFovourite: Bool)
+    func getInfoButtonDidTap(inputText: String, parameterForSearch: SearchType)
+    func fovouriteButtonTapped(isFovourite: Bool, type: SearchType)
 }
 
 public final class ContentView: UIView {
@@ -88,7 +87,7 @@ public final class ContentView: UIView {
     // MARK: - Private Properties
     
     private var inputString: String = ""
-    private var parameterForSearch: SearchURL?
+    private var parameterForSearch: SearchType?
     private var isPersonButtonEnabled = false
     private var isStarshipButtonEnabled = false
     private var isPlanetButtonEnabled = false
@@ -164,7 +163,7 @@ public final class ContentView: UIView {
         configureStarshipButton()
         personButton.backgroundColor = .blue
         personButton.setImage(UIImage(named: "color_person"), for: .normal)
-        parameterForSearch = SearchURL.person
+        parameterForSearch = SearchType.person
         configureGetInfoButton(isEnabled: true)
     }
     
@@ -176,7 +175,7 @@ public final class ContentView: UIView {
         configureStarshipButton()
         planetButton.backgroundColor = .blue
         planetButton.setImage(UIImage(named: "color_planet"), for: .normal)
-        parameterForSearch = SearchURL.planet
+        parameterForSearch = SearchType.planet
         configureGetInfoButton(isEnabled: true)
     }
     
@@ -188,7 +187,7 @@ public final class ContentView: UIView {
         configurePlanetButton()
         starshipButton.backgroundColor = .blue
         starshipButton.setImage(UIImage(named: "color_starship"), for: .normal)
-        parameterForSearch = SearchURL.starship
+        parameterForSearch = SearchType.starship
         configureGetInfoButton(isEnabled: true)
     }
     
@@ -274,7 +273,6 @@ extension ContentView: UITextFieldDelegate {
 }
 
 // MARK: - Configurable
-
 extension ContentView: Configurable {
     public typealias ViewModel = ContentViewModel
     
@@ -288,7 +286,8 @@ extension ContentView: Configurable {
                     infoValueViewModels: [
                         .init(title: "Name: ", subtitle: viewModel.name ?? ""),
                         .init(title: "Gender: ", subtitle: viewModel.gender ?? "")
-                    ]
+                    ],
+                    searchType: .person
                 )
             )
         case .planet:
@@ -298,10 +297,11 @@ extension ContentView: Configurable {
                     infoValueViewModels: [
                         .init(title: "Name: ", subtitle: viewModel.name ?? ""),
                         .init(title: "Diameter: ", subtitle: viewModel.diameter ?? "")
-                    ]
+                    ],
+                    searchType: .planet
                 )
             )
-        case .starsShip:
+        case .starship:
             infoView.configure(
                 with: .init(
                     id: viewModel.id ?? 0,
@@ -310,7 +310,8 @@ extension ContentView: Configurable {
                         .init(title: "Model: ", subtitle: viewModel.model ?? ""),
                         .init(title: "Manufacturer: ", subtitle: viewModel.manufacturer ?? ""),
                         .init(title: "Passengers: ", subtitle: viewModel.passengers ?? "")
-                    ]
+                    ],
+                    searchType: .starship
                 )
             )
         default:
@@ -322,9 +323,9 @@ extension ContentView: Configurable {
 }
 
 // MARK: - InfoViewProtocol
-
 extension ContentView: InfoViewProtocol {
-    public func fovouriteButtonTapped(isFovourite: Bool) {
-        delegate?.fovouriteButtonTapped(isFovourite: isFovourite)
+    public func fovouriteButtonTapped(isFovourite: Bool, type: SearchType) {
+        guard let type = parameterForSearch else { return }
+        delegate?.fovouriteButtonTapped(isFovourite: isFovourite, type: type)
     }
 }

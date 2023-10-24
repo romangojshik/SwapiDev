@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainTabBarViewController.swift
 //  StarWars
 //
 //  Created by Roman on 8/31/23.
@@ -10,7 +10,6 @@ import UIKit
 class MainTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         view.backgroundColor = .white
         
         generateTabBar()

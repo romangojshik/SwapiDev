@@ -1,5 +1,5 @@
 //
-//  InfoView.swift
+//  ContentFavouritesView.swift
 //  StarWars
 //
 //  Created by Roman on 9/2/23.
@@ -8,9 +8,8 @@
 import SnapKit
 
 //MARK: - ContentFavouritesProtocol
-
 protocol ContentFavouritesProtocol: AnyObject {
-    func fovouriteButtonTapped(isFovourite: Bool, id: Int)
+    func fovouriteButtonTapped(isFovourite: Bool, id: Int, type: SearchType)
 }
 
 public final class ContentFavouritesView: UIView {
@@ -35,6 +34,7 @@ public final class ContentFavouritesView: UIView {
     // MARK: - Private Properties
     
     private var id: Int = 0
+    private var searchType: SearchType = .none
     
     // MARK: - UIView
     
@@ -74,6 +74,7 @@ public final class ContentFavouritesView: UIView {
             make.top.equalToSuperview().inset(50)
             make.centerX.equalToSuperview()
         }
+        
         verticalStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(100)
             make.bottom.lessThanOrEqualToSuperview().inset(100)
@@ -99,18 +100,19 @@ extension ContentFavouritesView: Configurable {
     public struct ViewModel {
         let id: Int
         let infoValueViewModels: [InfoValueView.ViewModel]
+        let searchType: SearchType
     }
     
     public func configure(with viewModel: ViewModel) {
         id = viewModel.id
+        searchType = viewModel.searchType
         setupInfoValueView(viewModels: viewModel.infoValueViewModels)
     }
 }
 
 // MARK: - InfoFavouritesViewProtocol
-
 extension ContentFavouritesView: InfoFavouritesViewProtocol {
     public func fovouriteButtonTapped(isFovourite: Bool, id: Int) {
-        delegate?.fovouriteButtonTapped(isFovourite: isFovourite, id: id)
+        delegate?.fovouriteButtonTapped(isFovourite: isFovourite, id: id, type: searchType)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  InfoView.swift
+//  InfoFavouritesView.swift
 //  StarWars
 //
 //  Created by Roman on 9/2/23.
@@ -117,8 +117,7 @@ public final class InfoFavouritesView: UIView {
     }
 }
 
-// MARK: - InfoFavouritesView
-
+// MARK: - Configurable
 extension InfoFavouritesView: Configurable {
     public struct ViewModel {
         let id: Int

@@ -8,9 +8,8 @@
 import SnapKit
 
 // MARK: - InfoViewProtocol
-
 public protocol InfoViewProtocol: AnyObject {
-    func fovouriteButtonTapped(isFovourite: Bool)
+    func fovouriteButtonTapped(isFovourite: Bool, type: SearchType)
 }
 
 public final class InfoView: UIView {
@@ -35,6 +34,7 @@ public final class InfoView: UIView {
     // MARK: - Private Properties
     
     private var isAddInFovourites = false
+    private var searchType: SearchType = .none
     
     // MARK: - UIView
     
@@ -94,10 +94,10 @@ public final class InfoView: UIView {
     @objc private func addInFovourites() {
         if !isAddInFovourites {
             isAddInFovourites = true
-            delegate?.fovouriteButtonTapped(isFovourite: true)
+            delegate?.fovouriteButtonTapped(isFovourite: true, type: searchType)
         } else {
             isAddInFovourites = false
-            delegate?.fovouriteButtonTapped(isFovourite: false)
+            delegate?.fovouriteButtonTapped(isFovourite: false, type: searchType)
         }
         makeAddInFovouritesButton()
     }
@@ -105,17 +105,18 @@ public final class InfoView: UIView {
 }
 
 // MARK: - Configurable
-
 extension InfoView: Configurable {
     public struct ViewModel {
         let id: Int
         let infoValueViewModels: [InfoValueView.ViewModel]
+        let searchType: SearchType
     }
     
     public func configure(with viewModel: ViewModel) {
         verticalStackView.subviews.forEach { (view) in
             view.removeFromSuperview()
         }
+        searchType = viewModel.searchType
         setupInfoValueView(viewModels: viewModel.infoValueViewModels)
     }
 }

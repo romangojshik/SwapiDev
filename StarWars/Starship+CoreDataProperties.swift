@@ -8,7 +8,7 @@
 
 import CoreData
 
-@objc(Starsship)
+@objc(Starship)
 public class Starship: NSManagedObject {}
 
 extension Starship {

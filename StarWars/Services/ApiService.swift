@@ -7,25 +7,19 @@
 
 import Alamofire
 
-internal enum SearchURL {
-    case person
-    case planet
-    case starship
-}
-
 struct Constants {
     struct APIDetails {
         static let APIPath = "https://swapi.dev/api/"
         static let peoplePath = "people/"
         static let planetPath = "planets/"
-        static let starShipPath = "starships/"
+        static let starshipPath = "starships/"
     }
 }
 
 class ApiService {
     func serviceCall<T: Codable>(
         _ objectType: T.Type,
-        paramSearch: SearchURL,
+        paramSearch: SearchType,
         name: String,
         completion: @escaping (GeneralResponse<T>?, Error?) -> Void
     ) {
@@ -37,7 +31,9 @@ class ApiService {
         case .planet:
             fullPathURL = Constants.APIDetails.APIPath + Constants.APIDetails.planetPath
         case .starship:
-            fullPathURL = Constants.APIDetails.APIPath + Constants.APIDetails.starShipPath
+            fullPathURL = Constants.APIDetails.APIPath + Constants.APIDetails.starshipPath
+        case .none:
+            break
         }
         
         let paramPath = ["search": name]

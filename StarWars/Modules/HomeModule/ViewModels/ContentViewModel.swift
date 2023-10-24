@@ -1,5 +1,5 @@
 //
-//  PersonViewModel.swift
+//  ContentViewModel.swift
 //  StarWars
 //
 //  Created by Roman on 9/14/23.
@@ -10,7 +10,7 @@ import Foundation
 public enum SearchType {
     case person
     case planet
-    case starsShip
+    case starship
     case none
 }
 
