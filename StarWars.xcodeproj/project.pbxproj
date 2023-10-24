@@ -26,6 +26,7 @@
 		30A15A842AA3C336003766BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30B3C3A42AA0BB12002DE181 /* Assets.xcassets */; };
 		30A15AA22AA3C83F003766BE /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A15AA12AA3C83F003766BE /* Then.swift */; };
 		30A15AE32AA3D977003766BE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A15AE22AA3D977003766BE /* ContentView.swift */; };
+		30B0ADC12AE7DA4700DF2A45 /* Starship+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B0ADBF2AE7DA4700DF2A45 /* Starship+CoreDataProperties.swift */; };
 		30B3C39C2AA0BB0F002DE181 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B3C39B2AA0BB0F002DE181 /* AppDelegate.swift */; };
 		30B3C39E2AA0BB0F002DE181 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B3C39D2AA0BB0F002DE181 /* SceneDelegate.swift */; };
 		30B3C3A02AA0BB0F002DE181 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B3C39F2AA0BB0F002DE181 /* MainTabBarViewController.swift */; };
@@ -76,6 +77,7 @@
 		30A15A0E2AA3BC12003766BE /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		30A15AA12AA3C83F003766BE /* Then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
 		30A15AE22AA3D977003766BE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		30B0ADBF2AE7DA4700DF2A45 /* Starship+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Starship+CoreDataProperties.swift"; path = "StarWars/Starship+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		30B3C3982AA0BB0F002DE181 /* StarWars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarWars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30B3C39B2AA0BB0F002DE181 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30B3C39D2AA0BB0F002DE181 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 		30B3C38F2AA0BB0E002DE181 = {
 			isa = PBXGroup;
 			children = (
+				30B0ADBF2AE7DA4700DF2A45 /* Starship+CoreDataProperties.swift */,
 				304E43532AE536E800510E9A /* Person+CoreDataProperties.swift */,
 				304E434B2AE5362300510E9A /* CoreData.xcdatamodeld */,
 				30B3C39A2AA0BB0F002DE181 /* StarWars */,
@@ -586,6 +589,7 @@
 				304013042ABC7682001E2537 /* ContentFavouritesView.swift in Sources */,
 				304066A62AB0BB3300F8D864 /* PlanetModel.swift in Sources */,
 				3040130C2ABDA111001E2537 /* UInt16.swift in Sources */,
+				30B0ADC12AE7DA4700DF2A45 /* Starship+CoreDataProperties.swift in Sources */,
 				30A15AE32AA3D977003766BE /* ContentView.swift in Sources */,
 				304013082ABCA505001E2537 /* Space.swift in Sources */,
 				30B3C3A02AA0BB0F002DE181 /* MainTabBarViewController.swift in Sources */,

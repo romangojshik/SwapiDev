@@ -16,7 +16,7 @@ public final class CoreDataManager: NSObject {
     public var isUpdate = false
     
     // MARK: - Private Properties
-
+    
     private var appDelegate: AppDelegate {
         UIApplication.shared.delegate as! AppDelegate
     }
@@ -24,13 +24,14 @@ public final class CoreDataManager: NSObject {
     // MARK: - Private Methods
     
     private override init() {}
-
+    
     private var context: NSManagedObjectContext {
         appDelegate.persistentConatainer.viewContext
     }
     
     // MARK: - Public Methods
-
+    
+    /// Person
     public func createPerson(id: Int32, name: String, gender: String) {
         guard let personEntityDescription = NSEntityDescription.entity(forEntityName: "Person", in: context) else { return }
         let person = Person(entity: personEntityDescription, insertInto: context)
@@ -60,11 +61,24 @@ public final class CoreDataManager: NSObject {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Person")
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
         do {
-            guard let people = try? context.fetch(fetchRequest) as? [Person],
-                  let person =  people.first
+            guard
+                let people = try? context.fetch(fetchRequest) as? [Person],
+                let person =  people.first
             else { return }
             person.name = name
             person.gender = gender
+        }
+        appDelegate.saveContext()
+    }
+    
+    public func deletePerson(id: Int32) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Person")
+        do {
+            guard
+                let people = try? context.fetch(fetchRequest) as? [Person],
+                let person = people.first(where: { $0.id == id })
+            else { return }
+            context.delete(person)
         }
         appDelegate.saveContext()
     }
@@ -78,13 +92,79 @@ public final class CoreDataManager: NSObject {
         appDelegate.saveContext()
     }
     
-    public func deletePerson(id: Int32) {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Person")
+    ///Starship
+    public func createStarship(
+        id: Int32,
+        name: String,
+        model: String,
+        manufacturer: String,
+        passengers: String
+    ) {
+        guard let personEntityDescription = NSEntityDescription.entity(forEntityName: "Starship", in: context) else { return }
+        let starship = Starship(entity: personEntityDescription, insertInto: context)
+        starship.id = id
+        starship.name = name
+        starship.model = model
+        starship.manufacturer = manufacturer
+        starship.passengers = passengers
+        
+        appDelegate.saveContext()
+    }
+    
+    public func fetchStarships() -> [Starship] {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Starship")
         do {
-            guard let people = try? context.fetch(fetchRequest) as? [Person],
-                  let person = people.first(where: { $0.id == id })
+            return (try? context.fetch(fetchRequest) as? [Starship]) ?? []
+        }
+    }
+    
+    public func fetchStarship(id: Int32) -> Starship? {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Starship")
+        do {
+            let starships = try? context.fetch(fetchRequest) as? [Starship] ?? []
+            return starships?.first(where: { $0.id == id })
+        }
+    }
+    
+    public func updateStarship(
+        id: Int32,
+        name: String,
+        model: String,
+        manufacturer: String,
+        passengers: String
+    ) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Starship")
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+        do {
+            guard
+                let starships = try? context.fetch(fetchRequest) as? [Starship],
+                let starship =  starships.first
             else { return }
-            context.delete(person)
+            starship.name = name
+            starship.model = model
+            starship.manufacturer = manufacturer
+            starship.passengers = passengers
+        }
+        appDelegate.saveContext()
+    }
+    
+    public func deleteStarship(id: Int32) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Starship")
+        do {
+            guard
+                let starships = try? context.fetch(fetchRequest) as? [Starship],
+                let starship = starships.first(where: { $0.id == id })
+            else { return }
+            context.delete(starship)
+        }
+        appDelegate.saveContext()
+    }
+    
+    public func deleteAllStarships() {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Starship")
+        do {
+            let people = try? context.fetch(fetchRequest) as? [Starship] ?? []
+            people?.forEach { context.delete($0) }
         }
         appDelegate.saveContext()
     }
