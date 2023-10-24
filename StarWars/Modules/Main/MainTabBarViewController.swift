@@ -32,7 +32,7 @@ class MainTabBarViewController: UITabBarController {
             generateVC(
                 viewController: FavouritesViewController(),
                 title: "Favorite",
-                image: UIImage(named: "favorite")
+                image: UIImage(named: "favourite")
             )
         ]
     }

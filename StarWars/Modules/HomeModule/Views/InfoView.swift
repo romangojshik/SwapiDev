@@ -20,8 +20,8 @@ public final class InfoView: UIView {
     
     // MARK: - Subview Properties
     
-    private lazy var fovouriteButton = UIButton().then {
-        $0.setImage(UIImage(named: "favorite"), for: .normal)
+    private lazy var favouriteButton = UIButton().then {
+        $0.setImage(UIImage(named: "favourite"), for: .normal)
         $0.addTarget(self, action: #selector(addInFovourites), for: .touchUpInside)
     }
     
@@ -58,12 +58,12 @@ public final class InfoView: UIView {
     }
     
     private func addSubviews() {
-        addSubview(fovouriteButton)
+        addSubview(favouriteButton)
         addSubview(verticalStackView)
     }
     
     private func makeConstraints() {
-        fovouriteButton.snp.makeConstraints { make in
+        favouriteButton.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(10)
             make.leading.equalTo(verticalStackView.snp.trailing).offset(10)
             make.trailing.equalToSuperview().inset(10)
@@ -87,8 +87,8 @@ public final class InfoView: UIView {
     
     private func makeAddInFovouritesButton() {
         isAddInFovourites
-            ? fovouriteButton.setImage(UIImage(named: "yellow_star"), for: .normal)
-            : fovouriteButton.setImage(UIImage(named: "favorite"), for: .normal)
+            ? favouriteButton.setImage(UIImage(named: "yellow_star"), for: .normal)
+            : favouriteButton.setImage(UIImage(named: "favourite"), for: .normal)
     }
     
     @objc private func addInFovourites() {

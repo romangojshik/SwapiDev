@@ -105,11 +105,17 @@ extension HomeViewController: ContentViewProtocol {
     func fovouriteButtonTapped(isFovourite: Bool) {
         let people = CoreDataManager.shared.fetchPeople()
         guard people.first(where: { $0.name == contentViewModel.name}) == nil else { return }
+        
+        guard
+            let name = contentViewModel.name,
+            let gender = contentViewModel.gender
+        else { return }
+        
         let id = UInt16.arc4random()
         CoreDataManager.shared.createPerson(
             id: Int32(id),
-            name: contentViewModel.name ?? "",
-            gender: contentViewModel.gender ?? ""
+            name: name,
+            gender: gender
         )
         CoreDataManager.shared.isUpdate = true
     }

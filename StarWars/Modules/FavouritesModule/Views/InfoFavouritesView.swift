@@ -25,22 +25,20 @@ public final class InfoFavouritesView: UIView {
         $0.spacing = 20
     }
     
-    private lazy var containerFavouriteButtonView = UIView()
+    private lazy var containerInfoView = UIView()
     
     private lazy var favouriteButton = UIButton().then {
         $0.setImage(UIImage(named: "yellow_star"), for: .normal)
         $0.addTarget(self, action: #selector(addInFavourites), for: .touchUpInside)
     }
-    
-    private lazy var containerVerticalStackView = UIView()
-    
+        
     private lazy var verticalStackView = UIStackView().then {
         $0.axis = .vertical
         $0.alignment = .leading
         $0.distribution = .fill
         $0.spacing = 15
     }
-        
+    
     // MARK: - Private Properties
     
     private var isAddInFovourites = false
@@ -68,25 +66,26 @@ public final class InfoFavouritesView: UIView {
         makeConstraints()
     }
     
-    private func addSubviews() {
-        containerFavouriteButtonView.addSubview(favouriteButton)
-        containerVerticalStackView.addSubview(verticalStackView)
-        horizontalStackView.addArrangedSubview(containerVerticalStackView)
-        horizontalStackView.addArrangedSubview(containerFavouriteButtonView)
+    private func addSubviews() {        
+        containerInfoView.addSubview(favouriteButton)
+        containerInfoView.addSubview(verticalStackView)
+        
+        horizontalStackView.addArrangedSubview(containerInfoView)
         addSubview(horizontalStackView)
     }
     
     private func makeConstraints() {
-        containerFavouriteButtonView.snp.makeConstraints { make in
-            make.width.equalTo(24)
-        }
         favouriteButton.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.width.equalToSuperview()
+            make.top.equalToSuperview().inset(10)
+            make.leading.equalTo(verticalStackView.snp.trailing).offset(10)
+            make.trailing.equalToSuperview().inset(10)
+            make.size.equalTo(24)
         }
+        
         verticalStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.bottom.leading.equalToSuperview().inset(10)
         }
+        
         horizontalStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
