@@ -2,7 +2,6 @@
 
 Application Content:
 
-
 The main page displays an input element that allows the user to search for characters, starships and planets by "name", and the API call is initialized only after the user has entered at least 2 characters.
 
 <img width="180" alt="Снимок экрана 2023-10-24 в 00 55 01" src="https://github.com/romangojshik/SwapiDev/assets/15184733/17ee03a6-b133-45bc-8002-92e74a88130f">
@@ -21,3 +20,8 @@ On the search page and in favorites is displayed:
 
 
 The information of the favorites is stored in Core Data, it is permanent (stored between application launches).
+
+<img width="259" alt="Снимок экрана 2023-10-24 в 17 02 48" src="https://github.com/romangojshik/SwapiDev/assets/15184733/76756248-3fce-4e25-a32c-a2e2c628c800">
+
+
+
