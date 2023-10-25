@@ -27,13 +27,21 @@ https://github.com/romangojshik/SwapiDev/assets/15184733/9698ad4a-be81-4d5b-82d3
 
 The application uses:
 
+Architecture - MVC
+
 Server/API - https://swapi.dev/documentation#starships
 
 Database - CodeData
 
 For request - Alamofire
 
-For auto layout - SnapKit
+For auto layout - SnapKit/UIKit
+
+In the future: 
+
+Test - Unit Test/Snapshot Testing
+
+Pattern - Cordinator
 
 
 
