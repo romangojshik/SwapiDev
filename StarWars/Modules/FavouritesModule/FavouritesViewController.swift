@@ -62,7 +62,6 @@ class FavouritesViewController: UIViewController {
     }
     
     private func deleteFromDB(id: Int, type: SearchType) {
-        
         switch type {
         case .person:
             CoreDataManager.shared.deletePerson(id: Int32(id))

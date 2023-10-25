@@ -9,7 +9,7 @@ import SnapKit
 
 // MARK: - InfoFavouritesViewProtocol
 public protocol InfoFavouritesViewProtocol: AnyObject {
-    func fovouriteButtonTapped(isFovourite: Bool, id: Int)
+    func fovouriteButtonTapped(isFovourite: Bool, id: Int, type: SearchType)
 }
 
 public final class InfoFavouritesView: UIView {
@@ -44,6 +44,7 @@ public final class InfoFavouritesView: UIView {
     private var isAddInFovourites = false
     private var idViewModel = 0
     private var infoValueViewModels: InfoValueView.ViewModel?
+    private var searchType: SearchType = .none
     
     // MARK: - UIView
     
@@ -108,10 +109,10 @@ public final class InfoFavouritesView: UIView {
     @objc private func addInFavourites() {
         if !isAddInFovourites {
             isAddInFovourites = true
-            delegate?.fovouriteButtonTapped(isFovourite: true, id: idViewModel)
+            delegate?.fovouriteButtonTapped(isFovourite: true, id: idViewModel, type: searchType)
         } else {
             isAddInFovourites = false
-            delegate?.fovouriteButtonTapped(isFovourite: false, id: idViewModel)
+            delegate?.fovouriteButtonTapped(isFovourite: false, id: idViewModel, type: searchType)
         }
         makeAddInFovouritesButton()
     }
@@ -122,12 +123,14 @@ extension InfoFavouritesView: Configurable {
     public struct ViewModel {
         let id: Int
         let infoValueViewModels: InfoValueView.ViewModel
+        let searchType: SearchType
     }
     
     public func configure(with viewModel: ViewModel) {
         setupInfoValueView(viewModel: viewModel.infoValueViewModels)
         infoValueViewModels = viewModel.infoValueViewModels
         idViewModel = viewModel.id
+        searchType = viewModel.searchType
     }
 }
 

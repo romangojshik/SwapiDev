@@ -7,7 +7,7 @@
 
 import SnapKit
 
-//MARK: - ContentFavouritesProtocol
+// MARK: - ContentFavouritesProtocol
 protocol ContentFavouritesProtocol: AnyObject {
     func fovouriteButtonTapped(isFovourite: Bool, id: Int, type: SearchType)
 }
@@ -24,6 +24,12 @@ public final class ContentFavouritesView: UIView {
         $0.font = UIFont.boldSystemFont(ofSize: 16.0)
     }
     
+    private lazy var containerView = UIView()
+    
+    private lazy var scrollView = UIScrollView().then {
+        $0.showsVerticalScrollIndicator = true
+    }
+    
     private lazy var verticalStackView = UIStackView().then {
         $0.axis = .vertical
         $0.alignment = .center
@@ -34,7 +40,6 @@ public final class ContentFavouritesView: UIView {
     // MARK: - Private Properties
     
     private var id: Int = 0
-    private var searchType: SearchType = .none
     
     // MARK: - UIView
     
@@ -66,28 +71,39 @@ public final class ContentFavouritesView: UIView {
     
     private func addSubviews() {
         addSubview(titleLabel)
-        addSubview(verticalStackView)
+        containerView.addSubview(verticalStackView)
+        scrollView.addSubview(containerView)
+        addSubview(scrollView)
     }
     
     private func makeConstraints() {
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(50)
+            make.top.equalTo(safeAreaLayoutGuide).inset(10)
             make.centerX.equalToSuperview()
         }
         
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+        }
+        
+        containerView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.edges.equalToSuperview()
+        }
+        
         verticalStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(100)
-            make.bottom.lessThanOrEqualToSuperview().inset(100)
-            make.leading.trailing.equalToSuperview().inset(10)
+            make.top.leading.trailing.equalToSuperview().inset(10)
         }
     }
     
-    private func setupInfoValueView(viewModels: [InfoValueView.ViewModel]) {
+    private func setupInfoValueView(viewModels: [InfoValueView.ViewModel], searchType: SearchType) {
         let infoFavouritesView = InfoFavouritesView()
         viewModels.forEach { viewModel in
             infoFavouritesView.delegate = self
             infoFavouritesView.configure(
-                with: .init(id: id, infoValueViewModels: viewModel)
+                with: .init(id: id, infoValueViewModels: viewModel, searchType: searchType)
             )
         }
         verticalStackView.addArrangedSubview(infoFavouritesView)
@@ -105,14 +121,17 @@ extension ContentFavouritesView: Configurable {
     
     public func configure(with viewModel: ViewModel) {
         id = viewModel.id
-        searchType = viewModel.searchType
-        setupInfoValueView(viewModels: viewModel.infoValueViewModels)
+        setupInfoValueView(viewModels: viewModel.infoValueViewModels, searchType: viewModel.searchType)
+        
+        containerView.snp.makeConstraints { make in
+            make.height.equalTo(verticalStackView.snp.height).offset(20)
+        }
     }
 }
 
 // MARK: - InfoFavouritesViewProtocol
 extension ContentFavouritesView: InfoFavouritesViewProtocol {
-    public func fovouriteButtonTapped(isFovourite: Bool, id: Int) {
-        delegate?.fovouriteButtonTapped(isFovourite: isFovourite, id: id, type: searchType)
+    public func fovouriteButtonTapped(isFovourite: Bool, id: Int, type: SearchType) {
+        delegate?.fovouriteButtonTapped(isFovourite: isFovourite, id: id, type: type)
     }
 }

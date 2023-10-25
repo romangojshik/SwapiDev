@@ -113,7 +113,7 @@ extension HomeViewController: ContentViewProtocol {
         switch type {
         case .person:
             let people = CoreDataManager.shared.fetchPeople()
-            guard people.first(where: { $0.name == contentViewModel.name}) == nil else { return }
+//            guard people.first(where: { $0.name == contentViewModel.name}) == nil else { return }
             
             guard
                 let name = contentViewModel.name,

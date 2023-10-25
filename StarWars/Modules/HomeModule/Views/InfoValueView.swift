@@ -8,7 +8,6 @@
 import SnapKit
 
 public final class InfoValueView: UIView {
-    
     // MARK: - Subview Properties
     
     private lazy var horizontalStackView = UIStackView().then {
@@ -23,6 +22,8 @@ public final class InfoValueView: UIView {
     private lazy var subtitleLabel = UILabel().then {
         $0.numberOfLines = 0
     }
+    
+    // MARK: - Private Properties
     
     // MARK: - UIView
 
