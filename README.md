@@ -19,9 +19,17 @@ On the search page and in favorites is displayed:
 <img width="181" alt="Снимок экрана 2023-10-24 в 00 54 29" src="https://github.com/romangojshik/SwapiDev/assets/15184733/b458d2b5-9b83-440e-b5e7-2fff6d59ce8f">
 
 
-The information of the favorites is stored in Core Data, it is permanent (stored between application launches).
+The information of the favorites is stored in a database, it is permanent (stored between application launches).
 
 <img width="259" alt="Снимок экрана 2023-10-24 в 17 02 48" src="https://github.com/romangojshik/SwapiDev/assets/15184733/76756248-3fce-4e25-a32c-a2e2c628c800">
+
+https://github.com/romangojshik/SwapiDev/assets/15184733/9698ad4a-be81-4d5b-82d3-601afae7d50e
+
+The application uses:
+Server/API - https://swapi.dev/documentation#starships
+Database - CodeData
+For request - Alamofire
+For auto layout - SnapKit
 
 
 
