@@ -26,9 +26,13 @@ The information of the favorites is stored in a database, it is permanent (store
 https://github.com/romangojshik/SwapiDev/assets/15184733/9698ad4a-be81-4d5b-82d3-601afae7d50e
 
 The application uses:
+
 Server/API - https://swapi.dev/documentation#starships
+
 Database - CodeData
+
 For request - Alamofire
+
 For auto layout - SnapKit
 
 
