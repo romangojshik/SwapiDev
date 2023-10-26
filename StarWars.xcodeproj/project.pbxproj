@@ -12,6 +12,8 @@
 		3040130A2ABCC39B001E2537 /* InfoFavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304013092ABCC39B001E2537 /* InfoFavouritesView.swift */; };
 		3040130C2ABDA111001E2537 /* UInt16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3040130B2ABDA111001E2537 /* UInt16.swift */; };
 		304066A62AB0BB3300F8D864 /* PlanetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304066A52AB0BB3300F8D864 /* PlanetModel.swift */; };
+		304957012AEA929D0090E7A0 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 304957002AEA929D0090E7A0 /* Launch Screen.storyboard */; };
+		304957032AEA991B0090E7A0 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304957022AEA991B0090E7A0 /* LaunchViewController.swift */; };
 		304ABF8F2AAAFF2700F3D4F0 /* GeneralResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304ABF8E2AAAFF2700F3D4F0 /* GeneralResponse.swift */; };
 		304ABF922AAF57BE00F3D4F0 /* InfoValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304ABF912AAF57BE00F3D4F0 /* InfoValueView.swift */; };
 		304E434D2AE5362300510E9A /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 304E434B2AE5362300510E9A /* CoreData.xcdatamodeld */; };
@@ -65,6 +67,8 @@
 		304013092ABCC39B001E2537 /* InfoFavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoFavouritesView.swift; sourceTree = "<group>"; };
 		3040130B2ABDA111001E2537 /* UInt16.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UInt16.swift; sourceTree = "<group>"; };
 		304066A52AB0BB3300F8D864 /* PlanetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetModel.swift; sourceTree = "<group>"; };
+		304957002AEA929D0090E7A0 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		304957022AEA991B0090E7A0 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		304ABF8E2AAAFF2700F3D4F0 /* GeneralResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralResponse.swift; sourceTree = "<group>"; };
 		304ABF912AAF57BE00F3D4F0 /* InfoValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoValueView.swift; sourceTree = "<group>"; };
 		304E434C2AE5362300510E9A /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
@@ -149,6 +153,15 @@
 				304013072ABCA505001E2537 /* Space.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		304956FF2AEA927B0090E7A0 /* LunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				304957002AEA929D0090E7A0 /* Launch Screen.storyboard */,
+				304957022AEA991B0090E7A0 /* LaunchViewController.swift */,
+			);
+			path = LunchScreen;
 			sourceTree = "<group>";
 		};
 		304ABF902AAF51D800F3D4F0 /* ViewModels */ = {
@@ -311,6 +324,7 @@
 		30BF89BE2AB3346D00407E1F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				304956FF2AEA927B0090E7A0 /* LunchScreen */,
 				30A15A082AA3B818003766BE /* Main */,
 				30A15A042AA3B7F5003766BE /* FavouritesModule */,
 				30A159FB2AA3B7A2003766BE /* HomeModule */,
@@ -449,6 +463,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				304957012AEA929D0090E7A0 /* Launch Screen.storyboard in Resources */,
 				30A15A842AA3C336003766BE /* Assets.xcassets in Resources */,
 				30A15A832AA3C332003766BE /* Info.plist in Resources */,
 			);
@@ -591,6 +606,7 @@
 				3040130C2ABDA111001E2537 /* UInt16.swift in Sources */,
 				30B0ADC12AE7DA4700DF2A45 /* Starship+CoreDataProperties.swift in Sources */,
 				30A15AE32AA3D977003766BE /* ContentView.swift in Sources */,
+				304957032AEA991B0090E7A0 /* LaunchViewController.swift in Sources */,
 				304013082ABCA505001E2537 /* Space.swift in Sources */,
 				30B3C3A02AA0BB0F002DE181 /* MainTabBarViewController.swift in Sources */,
 				30A159F72AA23EA8003766BE /* ProgressHUD.swift in Sources */,
