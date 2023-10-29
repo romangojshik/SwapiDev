@@ -34,13 +34,13 @@ public struct ContentViewModel {
     public let manufacturer: String?
     public let passengers: String?
     public var starships: [Starship] = []
-
+    
     
     init(
         type: SearchType = SearchType.none,
         id: Int? = nil,
         name: String? = nil,
-
+        
         gender: String?  = nil,
         diameter: String? = nil,
         population: String? = nil,
@@ -53,7 +53,7 @@ public struct ContentViewModel {
         self.type = type
         self.id = id
         self.name = name
-    
+        
         self.gender = gender
         
         self.diameter = diameter
@@ -68,7 +68,7 @@ public struct ContentViewModel {
     }
     
     // MARK: - Private Methods
-
+    
     private mutating func fetchPeople() {
         people = CoreDataManager.shared.fetchPeople()
     }
@@ -79,8 +79,14 @@ public struct ContentViewModel {
     
     // MARK: - Public Methods
     
-    public mutating func createPerson(name: String, gender: String) {
-//            guard people.first(where: { $0.name == contentViewModel.name}) == nil else { return }
+    /// Person
+    public mutating func createPerson(name: String?, gender: String?) {
+        guard
+            let name = name,
+            let gender = gender
+        else { return }
+        
+        //guard people.first(where: { $0.name == contentViewModel.name}) == nil else { return }
         
         let id = UInt16.arc4random()
         CoreDataManager.shared.createPerson(
@@ -96,4 +102,38 @@ public struct ContentViewModel {
         CoreDataManager.shared.deletePerson(id: Int32(id))
         people = CoreDataManager.shared.fetchPeople()
     }
+    
+    /// Starship
+    public mutating func createStarship(
+        name: String?,
+        model: String?,
+        manufacturer: String?,
+        passengers: String?
+    ) {
+        guard
+            let name = name,
+            let model = model,
+            let manufacturer = manufacturer,
+            let passengers = passengers
+        else { return }
+        
+        guard starships.first(where: { $0.name == name}) == nil else { return }
+
+        let id = UInt16.arc4random()
+        CoreDataManager.shared.createStarship(
+            id: Int32(id),
+            name: name,
+            model: model,
+            manufacturer: manufacturer,
+            passengers: passengers
+        )
+        fetchStarship()
+        CoreDataManager.shared.isUpdate = true
+    }
+    
+    public mutating func deleteStarship(id: Int) {
+        CoreDataManager.shared.deletePerson(id: Int32(id))
+        people = CoreDataManager.shared.fetchPeople()
+    }
+    
 }

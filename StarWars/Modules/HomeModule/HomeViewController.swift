@@ -112,37 +112,16 @@ extension HomeViewController: ContentViewProtocol {
     func fovouriteButtonTapped(isFovourite: Bool, type: SearchType) {
         switch type {
         case .person:
-            guard
-                let name = contentViewModel.name,
-                let gender = contentViewModel.gender
-            else { return }
-            contentViewModel.createPerson(name: name, gender: gender)
-            CoreDataManager.shared.isUpdate = true
-            
+            contentViewModel.createPerson(name: contentViewModel.name, gender: contentViewModel.gender)
         case .planet:
             print("")
-            
         case .starship:
-            let starships = CoreDataManager.shared.fetchStarships()
-            guard starships.first(where: { $0.name == contentViewModel.name}) == nil else { return }
-            
-            guard
-                let name = contentViewModel.name,
-                let model = contentViewModel.model,
-                let manufacturer = contentViewModel.manufacturer,
-                let passengers = contentViewModel.passengers
-            else { return }
-            
-            let id = UInt16.arc4random()
-            CoreDataManager.shared.createStarship(
-                id: Int32(id),
-                name: name,
-                model: model,
-                manufacturer: manufacturer,
-                passengers: passengers
-            )
-            CoreDataManager.shared.isUpdate = true
-            
+            contentViewModel.createStarship(
+                name: contentViewModel.name,
+                model: contentViewModel.model,
+                manufacturer: contentViewModel.manufacturer,
+                passengers: contentViewModel.passengers
+            )            
         default:
             break
         }
