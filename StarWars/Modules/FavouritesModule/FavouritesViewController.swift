@@ -33,9 +33,10 @@ class FavouritesViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if CoreDataManager.shared.isUpdate {
+            contentViewModel = ContentViewModel()
             contentView.reloadData()
-            people = CoreDataManager.shared.fetchPeople()
-            starships = CoreDataManager.shared.fetchStarships()
+            people = contentViewModel.people
+            starships = contentViewModel.starships
             configure(with: .init())
             CoreDataManager.shared.isUpdate = false
         }
@@ -46,8 +47,8 @@ class FavouritesViewController: UIViewController {
     private func setup() {
         addSubviews()
         makeConstraints()
-        people = CoreDataManager.shared.fetchPeople()
-        starships = CoreDataManager.shared.fetchStarships()
+        people = contentViewModel.people
+        starships = contentViewModel.starships
         configure(with: .init())
     }
     
@@ -64,8 +65,8 @@ class FavouritesViewController: UIViewController {
     private func deleteFromDB(id: Int, type: SearchType) {
         switch type {
         case .person:
-            CoreDataManager.shared.deletePerson(id: Int32(id))
-            people = CoreDataManager.shared.fetchPeople()
+            contentViewModel.deletePerson(id: id)
+            people = contentViewModel.people
             contentView.reloadData()
             configure(with: .init())
         case .starship:

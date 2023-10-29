@@ -30,9 +30,11 @@ public struct ContentViewModel {
     public let population: String?
     
     /// Model Starship
-    let model: String?
-    let manufacturer: String?
-    let passengers: String?
+    public let model: String?
+    public let manufacturer: String?
+    public let passengers: String?
+    public var starships: [Starship] = []
+
     
     init(
         type: SearchType = SearchType.none,
@@ -45,9 +47,8 @@ public struct ContentViewModel {
         
         model: String? = nil,
         manufacturer: String? = nil,
-        passengers: String? = nil,
+        passengers: String? = nil
         
-        people: [Person] = []
     ) {
         self.type = type
         self.id = id
@@ -61,5 +62,38 @@ public struct ContentViewModel {
         self.model = model
         self.manufacturer = manufacturer
         self.passengers = passengers
+        
+        fetchPeople()
+        fetchStarship()
+    }
+    
+    // MARK: - Private Methods
+
+    private mutating func fetchPeople() {
+        people = CoreDataManager.shared.fetchPeople()
+    }
+    
+    private mutating func fetchStarship() {
+        starships = CoreDataManager.shared.fetchStarships()
+    }
+    
+    // MARK: - Public Methods
+    
+    public mutating func createPerson(name: String, gender: String) {
+//            guard people.first(where: { $0.name == contentViewModel.name}) == nil else { return }
+        
+        let id = UInt16.arc4random()
+        CoreDataManager.shared.createPerson(
+            id: Int32(id),
+            name: name,
+            gender: gender
+        )
+        fetchPeople()
+        CoreDataManager.shared.isUpdate = true
+    }
+    
+    public mutating func deletePerson(id: Int) {
+        CoreDataManager.shared.deletePerson(id: Int32(id))
+        people = CoreDataManager.shared.fetchPeople()
     }
 }

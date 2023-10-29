@@ -175,7 +175,6 @@
 		30A159FB2AA3B7A2003766BE /* HomeModule */ = {
 			isa = PBXGroup;
 			children = (
-				304ABF902AAF51D800F3D4F0 /* ViewModels */,
 				30A15A0D2AA3BBFF003766BE /* Views */,
 				30A159DF2AA0E8E9003766BE /* HomeViewController.swift */,
 			);
@@ -324,6 +323,7 @@
 		30BF89BE2AB3346D00407E1F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				304ABF902AAF51D800F3D4F0 /* ViewModels */,
 				304956FF2AEA927B0090E7A0 /* LunchScreen */,
 				30A15A082AA3B818003766BE /* Main */,
 				30A15A042AA3B7F5003766BE /* FavouritesModule */,
