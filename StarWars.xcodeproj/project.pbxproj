@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		301D0E662AEF02D800018775 /* Planet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301D0E642AEF02D800018775 /* Planet+CoreDataProperties.swift */; };
 		304013042ABC7682001E2537 /* ContentFavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304013032ABC7682001E2537 /* ContentFavouritesView.swift */; };
 		304013082ABCA505001E2537 /* Space.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304013072ABCA505001E2537 /* Space.swift */; };
 		3040130A2ABCC39B001E2537 /* InfoFavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304013092ABCC39B001E2537 /* InfoFavouritesView.swift */; };
@@ -22,7 +23,6 @@
 		30A159E52AA0E99C003766BE /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A159E42AA0E99C003766BE /* FavouritesViewController.swift */; };
 		30A159ED2AA101CA003766BE /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A159EC2AA101CA003766BE /* ApiService.swift */; };
 		30A159F22AA1132E003766BE /* PersonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A159F12AA1132D003766BE /* PersonModel.swift */; };
-		30A159F72AA23EA8003766BE /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A159F62AA23EA8003766BE /* ProgressHUD.swift */; };
 		30A15A0F2AA3BC12003766BE /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A15A0E2AA3BC12003766BE /* InfoView.swift */; };
 		30A15A832AA3C332003766BE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30B3C3A92AA0BB12002DE181 /* Info.plist */; };
 		30A15A842AA3C336003766BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30B3C3A42AA0BB12002DE181 /* Assets.xcassets */; };
@@ -62,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		057596D8C72C6CC1042339D8 /* Pods_StarWars.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StarWars.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		301D0E642AEF02D800018775 /* Planet+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Planet+CoreDataProperties.swift"; path = "StarWars/Planet+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		304013032ABC7682001E2537 /* ContentFavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFavouritesView.swift; sourceTree = "<group>"; };
 		304013072ABCA505001E2537 /* Space.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Space.swift; sourceTree = "<group>"; };
 		304013092ABCC39B001E2537 /* InfoFavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoFavouritesView.swift; sourceTree = "<group>"; };
@@ -77,7 +78,6 @@
 		30A159E42AA0E99C003766BE /* FavouritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
 		30A159EC2AA101CA003766BE /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		30A159F12AA1132D003766BE /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
-		30A159F62AA23EA8003766BE /* ProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
 		30A15A0E2AA3BC12003766BE /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		30A15AA12AA3C83F003766BE /* Then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
 		30A15AE22AA3D977003766BE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -240,6 +240,7 @@
 		30B3C38F2AA0BB0E002DE181 = {
 			isa = PBXGroup;
 			children = (
+				301D0E642AEF02D800018775 /* Planet+CoreDataProperties.swift */,
 				30B0ADBF2AE7DA4700DF2A45 /* Starship+CoreDataProperties.swift */,
 				304E43532AE536E800510E9A /* Person+CoreDataProperties.swift */,
 				304E434B2AE5362300510E9A /* CoreData.xcdatamodeld */,
@@ -306,7 +307,6 @@
 		30BF89BC2AB3340700407E1F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				30A159F62AA23EA8003766BE /* ProgressHUD.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -609,10 +609,10 @@
 				304957032AEA991B0090E7A0 /* LaunchViewController.swift in Sources */,
 				304013082ABCA505001E2537 /* Space.swift in Sources */,
 				30B3C3A02AA0BB0F002DE181 /* MainTabBarViewController.swift in Sources */,
-				30A159F72AA23EA8003766BE /* ProgressHUD.swift in Sources */,
 				304E434D2AE5362300510E9A /* CoreData.xcdatamodeld in Sources */,
 				30B3C39C2AA0BB0F002DE181 /* AppDelegate.swift in Sources */,
 				30B3C39E2AA0BB0F002DE181 /* SceneDelegate.swift in Sources */,
+				301D0E662AEF02D800018775 /* Planet+CoreDataProperties.swift in Sources */,
 				30A159E52AA0E99C003766BE /* FavouritesViewController.swift in Sources */,
 				30A159E02AA0E8E9003766BE /* HomeViewController.swift in Sources */,
 				304E43552AE536E800510E9A /* Person+CoreDataProperties.swift in Sources */,

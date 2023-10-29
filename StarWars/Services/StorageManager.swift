@@ -8,6 +8,7 @@
 import CoreData
 import UIKit
 
+
 // MARK: - CRUD
 public final class CoreDataManager: NSObject {
     // MARK: - Public Properties
@@ -92,6 +93,85 @@ public final class CoreDataManager: NSObject {
         appDelegate.saveContext()
     }
     
+    /// Planet
+    public func createPlanet(
+        id: Int32,
+        name: String,
+        diameter: String,
+        population: String
+    ) {
+        guard let planetEntityDescription = NSEntityDescription.entity(forEntityName: "Planet", in: context) else { return }
+        let planet = Planet(entity: planetEntityDescription, insertInto: context)
+        planet.id = id
+        planet.name = name
+        planet.diameter = diameter
+        planet.population = population
+        
+        appDelegate.saveContext()
+    }
+    
+    public func fetchPlanets() -> [Planet] {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Planet")
+        do {
+            return (try? context.fetch(fetchRequest) as? [Planet]) ?? []
+        }
+    }
+    
+    public func fetchPlanet(id: Int32) -> Planet? {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Planet")
+        do {
+            let planets = try? context.fetch(fetchRequest) as? [Planet] ?? []
+            return planets?.first(where: { $0.id == id })
+        }
+    }
+    
+    public func updatePlanet(
+        id: Int32,
+        name: String,
+        diameter: String,
+        population: String
+    ) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Planet")
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+        
+        do {
+            guard
+                let planets = try? context.fetch(fetchRequest) as? [Planet],
+                let planet =  planets.first
+            else { return }
+            planet.name = name
+            planet.diameter = diameter
+            planet.population = population
+        }
+        
+        appDelegate.saveContext()
+    }
+    
+    public func deletePlanet(id: Int32) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Planet")
+        
+        do {
+            guard
+                let planets = try? context.fetch(fetchRequest) as? [Planet],
+                let planet = planets.first(where: { $0.id == id })
+            else { return }
+            context.delete(planet)
+        }
+        
+        appDelegate.saveContext()
+    }
+    
+    public func deleteAllPlanets() {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Planet")
+        
+        do {
+            let planets = try? context.fetch(fetchRequest) as? [Planet] ?? []
+            planets?.forEach { context.delete($0) }
+        }
+        
+        appDelegate.saveContext()
+    }
+    
     /// Starship
     public func createStarship(
         id: Int32,
@@ -135,6 +215,7 @@ public final class CoreDataManager: NSObject {
     ) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Starship")
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+        
         do {
             guard
                 let starships = try? context.fetch(fetchRequest) as? [Starship],
@@ -145,11 +226,13 @@ public final class CoreDataManager: NSObject {
             starship.manufacturer = manufacturer
             starship.passengers = passengers
         }
+        
         appDelegate.saveContext()
     }
     
     public func deleteStarship(id: Int32) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Starship")
+        
         do {
             guard
                 let starships = try? context.fetch(fetchRequest) as? [Starship],
@@ -157,15 +240,18 @@ public final class CoreDataManager: NSObject {
             else { return }
             context.delete(starship)
         }
+        
         appDelegate.saveContext()
     }
     
     public func deleteAllStarships() {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Starship")
+        
         do {
             let people = try? context.fetch(fetchRequest) as? [Starship] ?? []
             people?.forEach { context.delete($0) }
         }
+        
         appDelegate.saveContext()
     }
 }
