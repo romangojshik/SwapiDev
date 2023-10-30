@@ -8,7 +8,6 @@
 import CoreData
 import UIKit
 
-
 // MARK: - CRUD
 public final class CoreDataManager: NSObject {
     // MARK: - Public Properties

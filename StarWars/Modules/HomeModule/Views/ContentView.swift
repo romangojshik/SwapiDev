@@ -40,7 +40,7 @@ public final class ContentView: UIView {
         $0.axis = .horizontal
         $0.alignment = .leading
         $0.distribution = .fillEqually
-        $0.spacing = 15
+        $0.spacing = 20
     }
     
     private lazy var personButton = UIButton().then {
@@ -78,6 +78,8 @@ public final class ContentView: UIView {
         $0.layer.cornerRadius = 12
         $0.addTarget(self, action: #selector(getInfo), for: .touchUpInside)
     }
+    
+    private lazy var activityIndicator = UIActivityIndicatorView(style: .large)
     
     private lazy var infoView = InfoView().then() {
         $0.delegate = self
@@ -120,6 +122,7 @@ public final class ContentView: UIView {
         horizontalStackView.addArrangedSubview(starshipButton)
         addSubview(horizontalStackView)
         addSubview(getInfoButton)
+        addSubview(activityIndicator)
         addSubview(infoView)
     }
     
@@ -134,24 +137,29 @@ public final class ContentView: UIView {
             make.height.equalTo(40)
         }
         horizontalStackView.snp.makeConstraints { make in
-            make.top.equalTo(inputTextField.snp.bottom).offset(15)
+            make.top.equalTo(inputTextField.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.height.equalTo(32)
         }
         getInfoButton.snp.makeConstraints { make in
-            make.top.equalTo(horizontalStackView.snp.bottom).offset(15)
+            make.top.equalTo(horizontalStackView.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.height.equalTo(50)
             make.width.equalTo(200)
         }
+        activityIndicator.snp.makeConstraints { make in
+            make.top.equalTo(getInfoButton.snp.bottom).offset(30)
+            make.leading.trailing.equalToSuperview().inset(15)
+        }
         infoView.snp.makeConstraints { make in
-            make.top.equalTo(getInfoButton.snp.bottom).offset(15)
+            make.top.equalTo(getInfoButton.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(15)
         }
     }
     
     @objc private func getInfo() {
         guard let parameter = parameterForSearch  else { return }
+        activityIndicator.startAnimating()
         delegate?.getInfoButtonDidTap(inputText: inputString, parameterForSearch: parameter)
     }
     
@@ -248,6 +256,7 @@ extension ContentView: UITextFieldDelegate {
             configureStarshipButton()
             configureParamButton(isEnabled: false)
             configureGetInfoButton(isEnabled: false)
+            activityIndicator.stopAnimating()
             
             return
         }
@@ -267,6 +276,7 @@ extension ContentView: UITextFieldDelegate {
             infoView.isHidden = true
             configureParamButton(isEnabled: false)
             configureGetInfoButton(isEnabled: false)
+            activityIndicator.stopAnimating()
         }
         return true
     }
@@ -277,7 +287,6 @@ extension ContentView: Configurable {
     public typealias ViewModel = ContentViewModel
     
     public func configure(with viewModel: ViewModel) {
-        
         switch viewModel.type {
         case .person:
             infoView.configure(
@@ -290,6 +299,7 @@ extension ContentView: Configurable {
                     searchType: .person
                 )
             )
+            activityIndicator.stopAnimating()
         case .planet:
             infoView.configure(
                 with: .init(
@@ -302,6 +312,7 @@ extension ContentView: Configurable {
                     searchType: .planet
                 )
             )
+            activityIndicator.stopAnimating()
         case .starship:
             infoView.configure(
                 with: .init(
@@ -315,6 +326,7 @@ extension ContentView: Configurable {
                     searchType: .starship
                 )
             )
+            activityIndicator.stopAnimating()
         default:
             break
         }
