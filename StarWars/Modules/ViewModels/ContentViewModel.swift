@@ -28,6 +28,7 @@ public struct ContentViewModel {
     /// Model Planet
     public let diameter: String?
     public let population: String?
+    public var planets: [Planet] = []
     
     /// Model Starship
     public let model: String?
@@ -64,6 +65,7 @@ public struct ContentViewModel {
         self.passengers = passengers
         
         fetchPeople()
+        fetchPlanets()
         fetchStarship()
     }
     
@@ -71,6 +73,10 @@ public struct ContentViewModel {
     
     private mutating func fetchPeople() {
         people = CoreDataManager.shared.fetchPeople()
+    }
+    
+    private mutating func fetchPlanets() {
+        planets = CoreDataManager.shared.fetchPlanets()
     }
     
     private mutating func fetchStarship() {
@@ -100,7 +106,33 @@ public struct ContentViewModel {
     
     public mutating func deletePerson(id: Int) {
         CoreDataManager.shared.deletePerson(id: Int32(id))
-        people = CoreDataManager.shared.fetchPeople()
+        fetchPeople()
+    }
+    
+    /// Planet
+    public mutating func createPlanet(name: String?, diameter: String?, population: String?) {
+        guard
+            let name = name,
+            let diameter = diameter,
+            let population = population
+        else { return }
+        
+        //guard people.first(where: { $0.name == contentViewModel.name}) == nil else { return }
+        
+        let id = UInt16.arc4random()
+        CoreDataManager.shared.createPlanet(
+            id: Int32(id),
+            name: name,
+            diameter: diameter,
+            population: population
+        )
+        fetchPlanets()
+        CoreDataManager.shared.isUpdate = true
+    }
+    
+    public mutating func deletePlanet(id: Int) {
+        CoreDataManager.shared.deletePlanet(id: Int32(id))
+        fetchPlanets()
     }
     
     /// Starship
@@ -132,8 +164,8 @@ public struct ContentViewModel {
     }
     
     public mutating func deleteStarship(id: Int) {
-        CoreDataManager.shared.deletePerson(id: Int32(id))
-        people = CoreDataManager.shared.fetchPeople()
+        CoreDataManager.shared.deleteStarship(id: Int32(id))
+        fetchStarship()
     }
     
 }

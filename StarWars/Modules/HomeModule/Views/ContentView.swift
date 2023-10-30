@@ -296,7 +296,8 @@ extension ContentView: Configurable {
                     id: viewModel.id ?? 0,
                     infoValueViewModels: [
                         .init(title: "Name: ", subtitle: viewModel.name ?? ""),
-                        .init(title: "Diameter: ", subtitle: viewModel.diameter ?? "")
+                        .init(title: "Diameter: ", subtitle: viewModel.diameter ?? ""),
+                        .init(title: "Population: ", subtitle: viewModel.population ?? "")
                     ],
                     searchType: .planet
                 )

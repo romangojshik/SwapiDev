@@ -20,6 +20,7 @@ class FavouritesViewController: UIViewController {
     private let apiService = ApiService()
     private var isReloadContent = false
     private var people: [Person] = []
+    private var planets: [Planet] = []
     private var starships: [Starship] = []
     
     // MARK: - UIViewController
@@ -36,6 +37,7 @@ class FavouritesViewController: UIViewController {
             contentViewModel = ContentViewModel()
             contentView.reloadData()
             people = contentViewModel.people
+            planets = contentViewModel.planets
             starships = contentViewModel.starships
             configure(with: .init())
             CoreDataManager.shared.isUpdate = false
@@ -48,6 +50,7 @@ class FavouritesViewController: UIViewController {
         addSubviews()
         makeConstraints()
         people = contentViewModel.people
+        planets = contentViewModel.planets
         starships = contentViewModel.starships
         configure(with: .init())
     }
@@ -69,8 +72,13 @@ class FavouritesViewController: UIViewController {
             people = contentViewModel.people
             contentView.reloadData()
             configure(with: .init())
+        case .planet:
+            contentViewModel.deletePlanet(id: id)
+            planets = contentViewModel.planets
+            contentView.reloadData()
+            configure(with: .init())
         case .starship:
-            CoreDataManager.shared.deleteStarship(id: Int32(id))
+            contentViewModel.deleteStarship(id: id)
             starships = CoreDataManager.shared.fetchStarships()
             contentView.reloadData()
             configure(with: .init())
@@ -94,6 +102,20 @@ extension FavouritesViewController: Configurable {
                         .init(title: "Gender: ", subtitle: person.gender ?? "")
                     ],
                     searchType: .person
+                )
+            )
+        }
+        
+        planets.forEach { planet in
+            self.contentView.configure(
+                with: .init(
+                    id: Int(planet.id),
+                    infoValueViewModels: [
+                        .init(title: "Name: ", subtitle: planet.name ?? ""),
+                        .init(title: "Diameter: ", subtitle: planet.diameter ?? ""),
+                        .init(title: "Population: ", subtitle: planet.population ?? "")
+                    ],
+                    searchType: .planet
                 )
             )
         }

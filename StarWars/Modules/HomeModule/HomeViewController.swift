@@ -72,12 +72,19 @@ extension HomeViewController: ContentViewProtocol {
                 name: inputText,
                 completion: { (response, error) in
                     guard let result = response?.results.first else { return }
-                    let peopleViewModel = ContentViewModel(
+                    let planetViewModel = ContentViewModel(
                         type: .planet,
                         name: result.name,
-                        diameter: result.diameter
+                        diameter: result.diameter,
+                        population: result.population
                     )
-                    self.contentView.configure(with: peopleViewModel)
+                    self.contentView.configure(with: planetViewModel)
+                    self.contentViewModel = .init(
+                        type: .planet,
+                        name: result.name,
+                        diameter: result.diameter,
+                        population: result.population
+                    )
                 }
             )
         case .starship:
@@ -112,9 +119,16 @@ extension HomeViewController: ContentViewProtocol {
     func fovouriteButtonTapped(isFovourite: Bool, type: SearchType) {
         switch type {
         case .person:
-            contentViewModel.createPerson(name: contentViewModel.name, gender: contentViewModel.gender)
+            contentViewModel.createPerson(
+                name: contentViewModel.name,
+                gender: contentViewModel.gender
+            )
         case .planet:
-            print("")
+            contentViewModel.createPlanet(
+                name: contentViewModel.name,
+                diameter: contentViewModel.diameter,
+                population: contentViewModel.population
+            )
         case .starship:
             contentViewModel.createStarship(
                 name: contentViewModel.name,
@@ -125,6 +139,5 @@ extension HomeViewController: ContentViewProtocol {
         default:
             break
         }
-        
     }
 }
