@@ -159,6 +159,7 @@ public final class ContentView: UIView {
     
     @objc private func getInfo() {
         guard let parameter = parameterForSearch  else { return }
+        getInfoButton.setTitleColor(.lightGray, for: .highlighted)
         activityIndicator.startAnimating()
         delegate?.getInfoButtonDidTap(inputText: inputString, parameterForSearch: parameter)
     }
@@ -330,7 +331,7 @@ extension ContentView: Configurable {
         default:
             break
         }
-        
+        getInfoButton.isEnabled = !infoView.isHidden
         infoView.isHidden = false
     }
 }
