@@ -6,6 +6,8 @@
 //
 
 import SnapKit
+import CoreData
+
 
 class FavouritesViewController: UIViewController {
     // MARK: - Subview Properties
@@ -23,6 +25,8 @@ class FavouritesViewController: UIViewController {
     private var planets: [Planet] = []
     private var starships: [Starship] = []
     
+    var people2: [ObjectModel<NSManagedObject>] = []
+    
     // MARK: - UIViewController
     
     override func viewDidLoad() {
@@ -34,12 +38,8 @@ class FavouritesViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if CoreDataManager.shared.isUpdate {
-            contentViewModel = ContentViewModel()
             contentView.reloadData()
-            people = contentViewModel.people
-            planets = contentViewModel.planets
-            starships = contentViewModel.starships
-            configure(with: .init())
+            setup()
             CoreDataManager.shared.isUpdate = false
         }
     }
@@ -49,7 +49,9 @@ class FavouritesViewController: UIViewController {
     private func setup() {
         addSubviews()
         makeConstraints()
-        people = contentViewModel.people
+        contentViewModel = ContentViewModel()
+//        people = contentViewModel.people
+        people2 = contentViewModel.peopleModels
         planets = contentViewModel.planets
         starships = contentViewModel.starships
         configure(with: .init())
@@ -69,7 +71,8 @@ class FavouritesViewController: UIViewController {
         switch type {
         case .person:
             contentViewModel.deletePerson(id: id)
-            people = contentViewModel.people
+//            people = contentViewModel.people
+            people2 = contentViewModel.peopleModels
             contentView.reloadData()
             configure(with: .init())
         case .planet:
@@ -93,14 +96,19 @@ extension FavouritesViewController: Configurable {
     public typealias ViewModel = ContentViewModel
     
     public func configure(with viewModel: ViewModel) {
-        people.forEach { person in
+        people2.forEach { person in
+            
+            var infoValueViewModels: [InfoValueView.ViewModel] = []
+            let dict = person.descriptionValue.sorted { $0.key > $1.key }
+            dict.forEach { value in
+                let infoValueViewModel: InfoValueView.ViewModel = .init(title: value.key, subtitle: value.value)
+                infoValueViewModels.append(infoValueViewModel)
+            }
+            
             self.contentView.configure(
                 with: .init(
-                    id: Int(person.id),
-                    infoValueViewModels: [
-                        .init(title: "Name: ", subtitle: person.name ?? ""),
-                        .init(title: "Gender: ", subtitle: person.gender ?? "")
-                    ],
+                    id: person.id,
+                    infoValueViewModels: infoValueViewModels,
                     searchType: .person
                 )
             )

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 public enum SearchType {
     case person
@@ -24,11 +25,13 @@ public struct ContentViewModel {
     /// Model Person
     public let gender: String?
     public var people: [Person] = []
+    public var peopleModels = [ObjectModel]()
     
     /// Model Planet
     public let diameter: String?
     public let population: String?
     public var planets: [Planet] = []
+    public var planeteModels = [ObjectModel]()
     
     /// Model Starship
     public let model: String?
@@ -72,11 +75,23 @@ public struct ContentViewModel {
     // MARK: - Private Methods
     
     private mutating func fetchPeople() {
+        peopleModels = []
         people = CoreDataManager.shared.fetchPeople()
+        people.forEach { person in
+            var personModel = ObjectModel()
+            personModel.makeDescriptionValue(entity: person)
+            peopleModels.append(personModel)
+        }
     }
     
     private mutating func fetchPlanets() {
+        planets = []
         planets = CoreDataManager.shared.fetchPlanets()
+        planets.forEach { planet in
+            var planetModel = ObjectModel()
+            planetModel.makeDescriptionValue(entity: planet)
+            planeteModels.append(planetModel)
+        }
     }
     
     private mutating func fetchStarship() {
@@ -150,7 +165,7 @@ public struct ContentViewModel {
         else { return }
         
         guard starships.first(where: { $0.name == name}) == nil else { return }
-
+        
         let id = UInt16.arc4random()
         CoreDataManager.shared.createStarship(
             id: Int32(id),
@@ -168,4 +183,39 @@ public struct ContentViewModel {
         fetchStarship()
     }
     
+}
+
+protocol ObjectModelProtocol {
+    associatedtype Entity: NSManagedObject
+    
+    mutating func makeDescriptionValue(entity: Entity)
+}
+
+public struct ObjectModel<T: NSManagedObject>: ObjectModelProtocol {
+    typealias Entity = T
+    
+    public var id = 0
+    public var descriptionValue: [String: String] = [:]
+    
+    mutating func makeDescriptionValue(entity: T) {
+        switch entity {
+        case let entity as Person:
+            id = Int(entity.id)
+            guard
+                let name = entity.name,
+                let gender = entity.gender
+            else { return }
+            descriptionValue = ["Name" : name, "Gender": gender]
+        case let entity as Planet:
+            id = Int(entity.id)
+            guard
+                let name = entity.name,
+                let diameter = entity.diameter,
+                let population = entity.population
+            else { return }
+            descriptionValue = ["Name" : name, "Diameter": diameter, "Population": population]
+        default:
+            break
+        }
+    }
 }
