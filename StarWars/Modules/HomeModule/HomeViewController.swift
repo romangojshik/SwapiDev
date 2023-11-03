@@ -12,14 +12,13 @@ class HomeViewController: UIViewController {
     
     // MARK: - Subview Properties
     
-    private lazy var contentView = ContentView().then {
-        $0.delegate = self
-    }
+    private lazy var contentView = ContentView().then { $0.delegate = self }
     
     // MARK: - Private Properties
     
     private let apiService = ApiService()
     private var contentViewModel = ContentViewModel()
+    private var objectModel = ObjectModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,13 +55,13 @@ extension HomeViewController: ContentViewProtocol {
                 name: inputText,
                 completion: { (response, error) in
                     guard let result = response?.results.first else { return }
-                    let personViewModel = ContentViewModel(
+                    let personModel = ObjectModel(
                         type: .person,
                         name: result.name,
                         gender: result.gender
                     )
-                    self.contentView.configure(with: personViewModel)
-                    self.contentViewModel = .init(type: .person, name: result.name, gender: result.gender)
+                    self.contentView.configure(with: personModel)
+                    self.objectModel = .init(type: .person, name: result.name, gender: result.gender)
                 }
             )
         case .planet:
@@ -72,14 +71,14 @@ extension HomeViewController: ContentViewProtocol {
                 name: inputText,
                 completion: { (response, error) in
                     guard let result = response?.results.first else { return }
-                    let planetViewModel = ContentViewModel(
+                    let planetModel = ObjectModel(
                         type: .planet,
                         name: result.name,
                         diameter: result.diameter,
                         population: result.population
                     )
-                    self.contentView.configure(with: planetViewModel)
-                    self.contentViewModel = .init(
+                    self.contentView.configure(with: planetModel)
+                    self.objectModel = .init(
                         type: .planet,
                         name: result.name,
                         diameter: result.diameter,
@@ -94,15 +93,15 @@ extension HomeViewController: ContentViewProtocol {
                 name: inputText,
                 completion: { (response, error) in
                     guard let result = response?.results.first else { return }
-                    let starshipViewModel = ContentViewModel(
+                    let starshipModel = ObjectModel(
                         type: .starship,
                         name: result.name,
                         model: result.model,
                         manufacturer: result.manufacturer,
                         passengers: result.passengers
                     )
-                    self.contentView.configure(with: starshipViewModel)
-                    self.contentViewModel = .init(
+                    self.contentView.configure(with: starshipModel)
+                    self.objectModel = .init(
                         type: .starship,
                         name: result.name,
                         model: result.model,
@@ -120,21 +119,21 @@ extension HomeViewController: ContentViewProtocol {
         switch type {
         case .person:
             contentViewModel.createPerson(
-                name: contentViewModel.name,
-                gender: contentViewModel.gender
+                name: objectModel.name,
+                gender: objectModel.gender
             )
         case .planet:
             contentViewModel.createPlanet(
-                name: contentViewModel.name,
-                diameter: contentViewModel.diameter,
-                population: contentViewModel.population
+                name: objectModel.name,
+                diameter: objectModel.diameter,
+                population: objectModel.population
             )
         case .starship:
             contentViewModel.createStarship(
-                name: contentViewModel.name,
-                model: contentViewModel.model,
-                manufacturer: contentViewModel.manufacturer,
-                passengers: contentViewModel.passengers
+                name: objectModel.name,
+                model: objectModel.model,
+                manufacturer: objectModel.manufacturer,
+                passengers: objectModel.passengers
             )            
         default:
             break

@@ -8,7 +8,6 @@
 import SnapKit
 import CoreData
 
-
 class FavouritesViewController: UIViewController {
     // MARK: - Subview Properties
     
@@ -21,11 +20,10 @@ class FavouritesViewController: UIViewController {
     private var contentViewModel = ContentViewModel()
     private let apiService = ApiService()
     private var isReloadContent = false
-    private var people: [Person] = []
-    private var planets: [Planet] = []
-    private var starships: [Starship] = []
     
-    var people2: [ObjectModel<NSManagedObject>] = []
+    var people: [FactoryObjectModel<NSManagedObject>] = []
+    var planets: [FactoryObjectModel<NSManagedObject>] = []
+    var starships: [FactoryObjectModel<NSManagedObject>] = []
     
     // MARK: - UIViewController
     
@@ -50,10 +48,9 @@ class FavouritesViewController: UIViewController {
         addSubviews()
         makeConstraints()
         contentViewModel = ContentViewModel()
-//        people = contentViewModel.people
-        people2 = contentViewModel.peopleModels
-        planets = contentViewModel.planets
-        starships = contentViewModel.starships
+        people = contentViewModel.peopleModels
+        planets = contentViewModel.planetModels
+        starships = contentViewModel.starshipModels
         configure(with: .init())
     }
     
@@ -71,18 +68,17 @@ class FavouritesViewController: UIViewController {
         switch type {
         case .person:
             contentViewModel.deletePerson(id: id)
-//            people = contentViewModel.people
-            people2 = contentViewModel.peopleModels
+            people = contentViewModel.peopleModels
             contentView.reloadData()
             configure(with: .init())
         case .planet:
             contentViewModel.deletePlanet(id: id)
-            planets = contentViewModel.planets
+            planets = contentViewModel.peopleModels
             contentView.reloadData()
             configure(with: .init())
         case .starship:
             contentViewModel.deleteStarship(id: id)
-            starships = CoreDataManager.shared.fetchStarships()
+            starships = contentViewModel.peopleModels
             contentView.reloadData()
             configure(with: .init())
         default:
@@ -96,15 +92,14 @@ extension FavouritesViewController: Configurable {
     public typealias ViewModel = ContentViewModel
     
     public func configure(with viewModel: ViewModel) {
-        people2.forEach { person in
-            
+        /// Person
+        people.forEach { person in
             var infoValueViewModels: [InfoValueView.ViewModel] = []
             let dict = person.descriptionValue.sorted { $0.key > $1.key }
             dict.forEach { value in
                 let infoValueViewModel: InfoValueView.ViewModel = .init(title: value.key, subtitle: value.value)
                 infoValueViewModels.append(infoValueViewModel)
             }
-            
             self.contentView.configure(
                 with: .init(
                     id: person.id,
@@ -113,31 +108,34 @@ extension FavouritesViewController: Configurable {
                 )
             )
         }
-        
+        /// Planets
         planets.forEach { planet in
+            var infoValueViewModels: [InfoValueView.ViewModel] = []
+            let dict = planet.descriptionValue.sorted { $0.key > $1.key }
+            dict.forEach { value in
+                let infoValueViewModel: InfoValueView.ViewModel = .init(title: value.key, subtitle: value.value)
+                infoValueViewModels.append(infoValueViewModel)
+            }
             self.contentView.configure(
                 with: .init(
-                    id: Int(planet.id),
-                    infoValueViewModels: [
-                        .init(title: "Name: ", subtitle: planet.name ?? ""),
-                        .init(title: "Diameter: ", subtitle: planet.diameter ?? ""),
-                        .init(title: "Population: ", subtitle: planet.population ?? "")
-                    ],
+                    id: planet.id,
+                    infoValueViewModels: infoValueViewModels,
                     searchType: .planet
                 )
             )
         }
-        
+        /// Starships
         starships.forEach { starship in
+            var infoValueViewModels: [InfoValueView.ViewModel] = []
+            let dict = starship.descriptionValue.sorted { $0.key > $1.key }
+            dict.forEach { value in
+                let infoValueViewModel: InfoValueView.ViewModel = .init(title: value.key, subtitle: value.value)
+                infoValueViewModels.append(infoValueViewModel)
+            }
             self.contentView.configure(
                 with: .init(
-                    id: Int(starship.id),
-                    infoValueViewModels: [
-                        .init(title: "Name: ", subtitle: starship.name ?? ""),
-                        .init(title: "Model: ", subtitle: starship.model ?? ""),
-                        .init(title: "Manufacturer: ", subtitle: starship.manufacturer ?? ""),
-                        .init(title: "Passengers: ", subtitle: starship.passengers ?? "")
-                    ],
+                    id: starship.id,
+                    infoValueViewModels: infoValueViewModels,
                     searchType: .starship
                 )
             )

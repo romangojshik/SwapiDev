@@ -285,7 +285,7 @@ extension ContentView: UITextFieldDelegate {
 
 // MARK: - Configurable
 extension ContentView: Configurable {
-    public typealias ViewModel = ContentViewModel
+    public typealias ViewModel = ObjectModel
     
     public func configure(with viewModel: ViewModel) {
         switch viewModel.type {

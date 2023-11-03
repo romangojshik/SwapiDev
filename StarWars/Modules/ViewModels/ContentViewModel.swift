@@ -17,56 +17,20 @@ public enum SearchType {
 
 public struct ContentViewModel {
     /// General properties
-    public let type: SearchType?
-    public let id: Int?
-    public let name: String?
-    public let favourite: Bool? = false
     
     /// Model Person
-    public let gender: String?
     public var people: [Person] = []
-    public var peopleModels = [ObjectModel]()
+    public var peopleModels = [FactoryObjectModel]()
     
     /// Model Planet
-    public let diameter: String?
-    public let population: String?
     public var planets: [Planet] = []
-    public var planeteModels = [ObjectModel]()
+    public var planetModels = [FactoryObjectModel]()
     
     /// Model Starship
-    public let model: String?
-    public let manufacturer: String?
-    public let passengers: String?
     public var starships: [Starship] = []
+    public var starshipModels = [FactoryObjectModel]()
     
-    
-    init(
-        type: SearchType = SearchType.none,
-        id: Int? = nil,
-        name: String? = nil,
-        
-        gender: String?  = nil,
-        diameter: String? = nil,
-        population: String? = nil,
-        
-        model: String? = nil,
-        manufacturer: String? = nil,
-        passengers: String? = nil
-        
-    ) {
-        self.type = type
-        self.id = id
-        self.name = name
-        
-        self.gender = gender
-        
-        self.diameter = diameter
-        self.population = population
-        
-        self.model = model
-        self.manufacturer = manufacturer
-        self.passengers = passengers
-        
+    init() {
         fetchPeople()
         fetchPlanets()
         fetchStarship()
@@ -78,7 +42,7 @@ public struct ContentViewModel {
         peopleModels = []
         people = CoreDataManager.shared.fetchPeople()
         people.forEach { person in
-            var personModel = ObjectModel()
+            var personModel = FactoryObjectModel()
             personModel.makeDescriptionValue(entity: person)
             peopleModels.append(personModel)
         }
@@ -88,9 +52,9 @@ public struct ContentViewModel {
         planets = []
         planets = CoreDataManager.shared.fetchPlanets()
         planets.forEach { planet in
-            var planetModel = ObjectModel()
+            var planetModel = FactoryObjectModel()
             planetModel.makeDescriptionValue(entity: planet)
-            planeteModels.append(planetModel)
+            planetModels.append(planetModel)
         }
     }
     
@@ -185,13 +149,62 @@ public struct ContentViewModel {
     
 }
 
+public struct ObjectModel {
+    /// General properties
+    public let type: SearchType?
+    public let id: Int?
+    public let name: String?
+    public let favourite: Bool? = false
+    
+    /// Model Person
+    public let gender: String?
+    
+    /// Model Planet
+    public let diameter: String?
+    public let population: String?
+    
+    /// Model Starship
+    public let model: String?
+    public let manufacturer: String?
+    public let passengers: String?
+    
+    
+    init(
+        type: SearchType = SearchType.none,
+        id: Int? = nil,
+        name: String? = nil,
+        
+        gender: String?  = nil,
+        diameter: String? = nil,
+        population: String? = nil,
+        
+        model: String? = nil,
+        manufacturer: String? = nil,
+        passengers: String? = nil
+        
+    ) {
+        self.type = type
+        self.id = id
+        self.name = name
+        
+        self.gender = gender
+        
+        self.diameter = diameter
+        self.population = population
+        
+        self.model = model
+        self.manufacturer = manufacturer
+        self.passengers = passengers
+    }
+}
+
 protocol ObjectModelProtocol {
     associatedtype Entity: NSManagedObject
     
     mutating func makeDescriptionValue(entity: Entity)
 }
 
-public struct ObjectModel<T: NSManagedObject>: ObjectModelProtocol {
+public struct FactoryObjectModel<T: NSManagedObject>: ObjectModelProtocol {
     typealias Entity = T
     
     public var id = 0
