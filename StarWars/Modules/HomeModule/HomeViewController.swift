@@ -7,6 +7,11 @@
 
 import UIKit
 
+struct HomeVCConstants {
+    static let addNewTask = "You add in favourites "
+    static let ok = "Ok"
+}
+
 class HomeViewController: UIViewController {
     // MARK: - Public Properties
     
@@ -40,6 +45,24 @@ class HomeViewController: UIViewController {
     private func makeConstraints() {
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+    }
+    
+    private func showAlertScreen(nameObject: String) {
+        let alertController = UIAlertController(
+            title: "",
+            message: "\(HomeVCConstants.addNewTask)\(nameObject)",
+            preferredStyle: .alert
+        )
+        
+        alertController.view.backgroundColor = .darkGray
+        alertController.view.alpha = 0.6
+        alertController.view.layer.cornerRadius = 15
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+          self.dismiss(animated: true, completion: nil)
         }
     }
 }
@@ -116,27 +139,32 @@ extension HomeViewController: ContentViewProtocol {
     }
     
     func fovouriteButtonTapped(isFovourite: Bool, type: SearchType) {
+        var nameObject = ""
         switch type {
         case .person:
             contentViewModel.createPerson(
                 name: objectModel.name,
                 gender: objectModel.gender
             )
+            nameObject = objectModel.name ?? ""
         case .planet:
             contentViewModel.createPlanet(
                 name: objectModel.name,
                 diameter: objectModel.diameter,
                 population: objectModel.population
             )
+            nameObject = objectModel.name ?? ""
         case .starship:
             contentViewModel.createStarship(
                 name: objectModel.name,
                 model: objectModel.model,
                 manufacturer: objectModel.manufacturer,
                 passengers: objectModel.passengers
-            )            
+            )
+            nameObject = objectModel.name ?? ""
         default:
             break
         }
+        showAlertScreen(nameObject: nameObject)
     }
 }

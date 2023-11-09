@@ -7,7 +7,7 @@
 
 import Alamofire
 
-struct Constants {
+struct APIConstants {
     struct APIDetails {
         static let APIPath = "https://swapi.dev/api/"
         static let peoplePath = "people/"
@@ -27,11 +27,11 @@ class ApiService {
 
         switch paramSearch {
         case .person:
-            fullPathURL = Constants.APIDetails.APIPath + Constants.APIDetails.peoplePath
+            fullPathURL = APIConstants.APIDetails.APIPath + APIConstants.APIDetails.peoplePath
         case .planet:
-            fullPathURL = Constants.APIDetails.APIPath + Constants.APIDetails.planetPath
+            fullPathURL = APIConstants.APIDetails.APIPath + APIConstants.APIDetails.planetPath
         case .starship:
-            fullPathURL = Constants.APIDetails.APIPath + Constants.APIDetails.starshipPath
+            fullPathURL = APIConstants.APIDetails.APIPath + APIConstants.APIDetails.starshipPath
         case .none:
             break
         }
