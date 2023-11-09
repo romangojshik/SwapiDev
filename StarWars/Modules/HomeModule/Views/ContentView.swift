@@ -82,7 +82,6 @@ public final class ContentView: UIView {
     private lazy var activityIndicator = UIActivityIndicatorView(style: .large)
     
     private lazy var infoView = InfoView().then() {
-        $0.delegate = self
         $0.isHidden = true
     }
     
@@ -333,13 +332,11 @@ extension ContentView: Configurable {
         }
         getInfoButton.isEnabled = !infoView.isHidden
         infoView.isHidden = false
-    }
-}
-
-// MARK: - InfoViewProtocol
-extension ContentView: InfoViewProtocol {
-    public func fovouriteButtonTapped(isFovourite: Bool, type: SearchType) {
-        guard let type = parameterForSearch else { return }
-        delegate?.fovouriteButtonTapped(isFovourite: isFovourite, type: type)
+        
+        infoView.fovouriteButtonHandler = { [weak self] isFovourite, type in
+            guard let self = self else { return }
+            guard let type = self.parameterForSearch else { return }
+            self.delegate?.fovouriteButtonTapped(isFovourite: isFovourite, type: type)
+        }
     }
 }

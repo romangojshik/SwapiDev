@@ -7,15 +7,10 @@
 
 import SnapKit
 
-// MARK: - InfoViewProtocol
-public protocol InfoViewProtocol: AnyObject {
-    func fovouriteButtonTapped(isFovourite: Bool, type: SearchType)
-}
-
 public final class InfoView: UIView {
     // MARK: - Public Properties
     
-    weak var delegate: InfoViewProtocol?
+    var fovouriteButtonHandler: ((Bool, SearchType) -> ())?
     
     // MARK: - Subview Properties
     
@@ -94,10 +89,10 @@ public final class InfoView: UIView {
     @objc private func addInFovourites() {
         if !isAddInFovourites {
             isAddInFovourites = true
-            delegate?.fovouriteButtonTapped(isFovourite: true, type: searchType)
+            fovouriteButtonHandler?(true, searchType)
         } else {
             isAddInFovourites = false
-            delegate?.fovouriteButtonTapped(isFovourite: false, type: searchType)
+            fovouriteButtonHandler?(false, searchType)
         }
         makeAddInFovouritesButton()
     }
