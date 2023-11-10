@@ -9,7 +9,6 @@ import UIKit
 
 struct HomeVCConstants {
     static let addNewTask = "You add in favourites "
-    static let ok = "Ok"
 }
 
 class HomeViewController: UIViewController {
