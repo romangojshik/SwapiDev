@@ -7,7 +7,7 @@
 
 import SnapKit
 
-class LaunchViewController: UIViewController {
+final class LaunchViewController: UIViewController {
     // MARK: - Subview Properties
     
     private lazy var imageView = UIImageView().then {

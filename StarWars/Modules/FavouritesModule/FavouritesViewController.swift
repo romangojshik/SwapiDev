@@ -8,7 +8,7 @@
 import SnapKit
 import CoreData
 
-class FavouritesViewController: UIViewController {
+final class FavouritesViewController: UIViewController {
     // MARK: - Subview Properties
     
     private lazy var contentView = ContentFavouritesView().then {
@@ -21,9 +21,9 @@ class FavouritesViewController: UIViewController {
     private let apiService = ApiService()
     private var isReloadContent = false
     
-    var people: [FactoryObjectModel<NSManagedObject>] = []
-    var planets: [FactoryObjectModel<NSManagedObject>] = []
-    var starships: [FactoryObjectModel<NSManagedObject>] = []
+    private var people: [FactoryObjectModel<NSManagedObject>] = []
+    private var planets: [FactoryObjectModel<NSManagedObject>] = []
+    private var starships: [FactoryObjectModel<NSManagedObject>] = []
     
     // MARK: - UIViewController
     

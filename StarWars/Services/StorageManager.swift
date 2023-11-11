@@ -17,9 +17,7 @@ public final class CoreDataManager: NSObject {
     
     // MARK: - Private Properties
     
-    private var appDelegate: AppDelegate {
-        UIApplication.shared.delegate as! AppDelegate
-    }
+    private var appDelegate: AppDelegate { UIApplication.shared.delegate as! AppDelegate }
     
     // MARK: - Private Methods
     

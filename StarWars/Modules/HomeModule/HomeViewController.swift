@@ -7,11 +7,11 @@
 
 import UIKit
 
-struct HomeVCConstants {
+fileprivate struct HomeVCConstants {
     static let addNewTask = "You add in favourites "
 }
 
-class HomeViewController: UIViewController {
+public final class HomeViewController: UIViewController {
     // MARK: - Public Properties
     
     // MARK: - Subview Properties
@@ -24,7 +24,7 @@ class HomeViewController: UIViewController {
     private var contentViewModel = ContentViewModel()
     private var objectModel = ObjectModel()
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setup()

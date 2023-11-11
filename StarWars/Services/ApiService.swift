@@ -7,7 +7,7 @@
 
 import Alamofire
 
-struct APIConstants {
+fileprivate struct APIConstants {
     struct APIDetails {
         static let APIPath = "https://swapi.dev/api/"
         static let peoplePath = "people/"
@@ -16,7 +16,7 @@ struct APIConstants {
     }
 }
 
-class ApiService {
+public final class ApiService {
     func serviceCall<T: Codable>(
         _ objectType: T.Type,
         paramSearch: SearchType,
