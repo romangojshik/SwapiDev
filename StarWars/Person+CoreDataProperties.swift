@@ -8,7 +8,6 @@
 
 import CoreData
 
-
 @objc(Person)
 public class Person: NSManagedObject {}
 
@@ -16,6 +15,7 @@ extension Person {
     @NSManaged public var id: Int32
     @NSManaged public var name: String?
     @NSManaged public var gender: String?
+    @NSManaged public var vehicles: [String]?
 }
 
 extension Person : Identifiable {}

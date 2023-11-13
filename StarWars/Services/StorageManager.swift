@@ -30,12 +30,13 @@ public final class CoreDataManager: NSObject {
     // MARK: - Public Methods
     
     /// Person
-    public func createPerson(id: Int32, name: String, gender: String) {
+    public func createPerson(id: Int32, name: String, gender: String, vehicles: [String]) {
         guard let personEntityDescription = NSEntityDescription.entity(forEntityName: "Person", in: context) else { return }
         let person = Person(entity: personEntityDescription, insertInto: context)
         person.id = id
         person.name = name
         person.gender = gender
+        person.vehicles = vehicles
         
         appDelegate.saveContext()
     }

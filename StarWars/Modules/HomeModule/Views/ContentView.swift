@@ -294,7 +294,11 @@ extension ContentView: Configurable {
                     id: viewModel.id ?? 0,
                     infoValueViewModels: [
                         .init(title: "Name: ", subtitle: viewModel.name ?? ""),
-                        .init(title: "Gender: ", subtitle: viewModel.gender ?? "")
+                        .init(title: "Gender: ", subtitle: viewModel.gender ?? ""),
+                        .init(
+                            title: "Count piloted vehicles: ",
+                            subtitle: String(viewModel.vehiclesURLStrig.count)
+                        )
                     ],
                     searchType: .person
                 )

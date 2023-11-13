@@ -18,7 +18,7 @@
 		304ABF8F2AAAFF2700F3D4F0 /* GeneralResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304ABF8E2AAAFF2700F3D4F0 /* GeneralResponse.swift */; };
 		304ABF922AAF57BE00F3D4F0 /* InfoValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304ABF912AAF57BE00F3D4F0 /* InfoValueView.swift */; };
 		304E434D2AE5362300510E9A /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 304E434B2AE5362300510E9A /* CoreData.xcdatamodeld */; };
-		304E43552AE536E800510E9A /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304E43532AE536E800510E9A /* Person+CoreDataProperties.swift */; };
+		305C4A2F2AFFF059000FFA9F /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305C4A2D2AFFF059000FFA9F /* Person+CoreDataProperties.swift */; };
 		30A159E02AA0E8E9003766BE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A159DF2AA0E8E9003766BE /* HomeViewController.swift */; };
 		30A159E52AA0E99C003766BE /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A159E42AA0E99C003766BE /* FavouritesViewController.swift */; };
 		30A159ED2AA101CA003766BE /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A159EC2AA101CA003766BE /* ApiService.swift */; };
@@ -73,7 +73,7 @@
 		304ABF8E2AAAFF2700F3D4F0 /* GeneralResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralResponse.swift; sourceTree = "<group>"; };
 		304ABF912AAF57BE00F3D4F0 /* InfoValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoValueView.swift; sourceTree = "<group>"; };
 		304E434C2AE5362300510E9A /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
-		304E43532AE536E800510E9A /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Person+CoreDataProperties.swift"; path = "StarWars/Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		305C4A2D2AFFF059000FFA9F /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Person+CoreDataProperties.swift"; path = "StarWars/Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		30A159DF2AA0E8E9003766BE /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		30A159E42AA0E99C003766BE /* FavouritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
 		30A159EC2AA101CA003766BE /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
@@ -240,9 +240,9 @@
 		30B3C38F2AA0BB0E002DE181 = {
 			isa = PBXGroup;
 			children = (
+				305C4A2D2AFFF059000FFA9F /* Person+CoreDataProperties.swift */,
 				301D0E642AEF02D800018775 /* Planet+CoreDataProperties.swift */,
 				30B0ADBF2AE7DA4700DF2A45 /* Starship+CoreDataProperties.swift */,
-				304E43532AE536E800510E9A /* Person+CoreDataProperties.swift */,
 				304E434B2AE5362300510E9A /* CoreData.xcdatamodeld */,
 				30B3C39A2AA0BB0F002DE181 /* StarWars */,
 				30B3C3B12AA0BB12002DE181 /* StarWarsTests */,
@@ -603,6 +603,7 @@
 				30D75E0B2AE6AAE100E8BA63 /* StarshipModel.swift in Sources */,
 				304013042ABC7682001E2537 /* ContentFavouritesView.swift in Sources */,
 				304066A62AB0BB3300F8D864 /* PlanetModel.swift in Sources */,
+				305C4A2F2AFFF059000FFA9F /* Person+CoreDataProperties.swift in Sources */,
 				3040130C2ABDA111001E2537 /* UInt16.swift in Sources */,
 				30B0ADC12AE7DA4700DF2A45 /* Starship+CoreDataProperties.swift in Sources */,
 				30A15AE32AA3D977003766BE /* ContentView.swift in Sources */,
@@ -615,7 +616,6 @@
 				301D0E662AEF02D800018775 /* Planet+CoreDataProperties.swift in Sources */,
 				30A159E52AA0E99C003766BE /* FavouritesViewController.swift in Sources */,
 				30A159E02AA0E8E9003766BE /* HomeViewController.swift in Sources */,
-				304E43552AE536E800510E9A /* Person+CoreDataProperties.swift in Sources */,
 				30A15A0F2AA3BC12003766BE /* InfoView.swift in Sources */,
 				30A15AA22AA3C83F003766BE /* Then.swift in Sources */,
 				30A159ED2AA101CA003766BE /* ApiService.swift in Sources */,

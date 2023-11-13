@@ -4,6 +4,7 @@
         <attribute name="gender" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="vehicles" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="Array&lt;Any&gt;"/>
     </entity>
     <entity name="Planet" representedClassName="Planet" syncable="YES">
         <attribute name="diameter" optional="YES" attributeType="String"/>
@@ -19,8 +20,8 @@
         <attribute name="passengers" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Person" positionX="-63" positionY="-18" width="128" height="88"/>
-        <element name="Starship" positionX="-63" positionY="9" width="128" height="118"/>
+        <element name="Person" positionX="-63" positionY="-18" width="128" height="103"/>
         <element name="Planet" positionX="-63" positionY="36" width="128" height="103"/>
+        <element name="Starship" positionX="-63" positionY="9" width="128" height="118"/>
     </elements>
 </model>

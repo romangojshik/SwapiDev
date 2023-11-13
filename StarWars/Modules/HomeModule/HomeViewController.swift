@@ -80,10 +80,16 @@ extension HomeViewController: ContentViewProtocol {
                     let personModel = ObjectModel(
                         type: .person,
                         name: result.name,
-                        gender: result.gender
+                        gender: result.gender,
+                        vehiclesURLStrig: result.vehicles
                     )
                     self.contentView.configure(with: personModel)
-                    self.objectModel = .init(type: .person, name: result.name, gender: result.gender)
+                    self.objectModel = .init(
+                        type: .person,
+                        name: result.name,
+                        gender: result.gender,
+                        vehiclesURLStrig: result.vehicles
+                    )
                 }
             )
         case .planet:
@@ -143,7 +149,8 @@ extension HomeViewController: ContentViewProtocol {
         case .person:
             contentViewModel.createPerson(
                 name: objectModel.name,
-                gender: objectModel.gender
+                gender: objectModel.gender,
+                vehicles: objectModel.vehiclesURLStrig
             )
             nameObject = objectModel.name ?? ""
         case .planet:

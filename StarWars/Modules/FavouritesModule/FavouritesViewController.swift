@@ -30,6 +30,10 @@ final class FavouritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        
+//        CoreDataManager.shared.deleteAllPerson()
+//        CoreDataManager.shared.deleteAllStarships()
+//        CoreDataManager.shared.deleteAllPlanets()
     }
     
     override func viewWillAppear(_ animated: Bool) {

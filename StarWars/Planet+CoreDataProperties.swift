@@ -8,7 +8,6 @@
 
 import CoreData
 
-
 @objc(Planet)
 public class Planet: NSManagedObject {}
 

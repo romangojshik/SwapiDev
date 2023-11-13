@@ -8,7 +8,6 @@
 
 import CoreData
 
-
 @objc(Starship)
 public class Starship: NSManagedObject {}
 

@@ -65,10 +65,11 @@ public struct ContentViewModel {
     // MARK: - Public Methods
     
     /// Person
-    public mutating func createPerson(name: String?, gender: String?) {
+    public mutating func createPerson(name: String?, gender: String?, vehicles: [String]?) {
         guard
             let name = name,
-            let gender = gender
+            let gender = gender,
+            let vehicles = vehicles
         else { return }
         
         //guard people.first(where: { $0.name == contentViewModel.name}) == nil else { return }
@@ -77,7 +78,8 @@ public struct ContentViewModel {
         CoreDataManager.shared.createPerson(
             id: Int32(id),
             name: name,
-            gender: gender
+            gender: gender,
+            vehicles: vehicles
         )
         fetchPeople()
         CoreDataManager.shared.isUpdate = true
@@ -158,7 +160,8 @@ public struct ObjectModel {
     
     /// Model Person
     public let gender: String?
-    
+    public let vehiclesURLStrig: [String]
+
     /// Model Planet
     public let diameter: String?
     public let population: String?
@@ -175,6 +178,8 @@ public struct ObjectModel {
         name: String? = nil,
         
         gender: String?  = nil,
+        vehiclesURLStrig: [String] = [],
+        
         diameter: String? = nil,
         population: String? = nil,
         
@@ -188,6 +193,7 @@ public struct ObjectModel {
         self.name = name
         
         self.gender = gender
+        self.vehiclesURLStrig = vehiclesURLStrig
         
         self.diameter = diameter
         self.population = population
@@ -216,9 +222,10 @@ public struct FactoryObjectModel<T: NSManagedObject>: ObjectModelProtocol {
             id = Int(entity.id)
             guard
                 let name = entity.name,
-                let gender = entity.gender
+                let gender = entity.gender,
+                let countVehicles = entity.vehicles?.count
             else { return }
-            descriptionValue = ["Name" : name, "Gender": gender]
+            descriptionValue = ["Name" : name, "Gender": gender, "Count piloted vehicles:": String(countVehicles)]
         case let entity as Planet:
             id = Int(entity.id)
             guard
